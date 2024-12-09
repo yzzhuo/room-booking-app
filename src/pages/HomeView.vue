@@ -10,5 +10,6 @@ export default {
 
 <template>
   <h2>HomeView</h2>
-  <button @click="goToAbout">Go to About</button>
+  <cv-button @click="goToAbout">Go to About</cv-button>
+  
 </template>

@@ -1,19 +1,26 @@
 <template>
-  <h1>Hello App!</h1>
-    <p>
-      <strong>Current route path:</strong> {{ $route.fullPath }}
-    </p>
-    <nav>
-      <RouterLink to="/">Go to Home</RouterLink>
-      <RouterLink to="/about">Go to About</RouterLink>
-    </nav>
-    <main>
-      <RouterView />
-    </main>
+  <cv-header aria-label="Carbon header">
+    <cv-skip-to-content href="#main-content">
+      Skip to content
+    </cv-skip-to-content>
+    <cv-header-name href="javascript:void(0)" prefix="Group2">
+      [Platform]
+    </cv-header-name>
+    <cv-header-nav aria-label="Carbon nav">
+    <cv-header-menu-item href="javascript:void(0)">
+      <RouterLink to="/">Home</RouterLink>
+    </cv-header-menu-item>
+    <cv-header-menu-item href="javascript:void(0)">
+      <RouterLink to="/about">About</RouterLink>
+    </cv-header-menu-item>
+    </cv-header-nav>
+  </cv-header>
+  <main class="mt-16 ml-12">
+    <RouterView />
+  </main>
 </template>
 
 <script setup>
-import { CButton } from '@carbon/vue'
 </script>
 
 <style lang="scss">
