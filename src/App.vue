@@ -3,8 +3,8 @@
     <cv-skip-to-content href="#main-content">
       Skip to content
     </cv-skip-to-content>
-    <cv-header-name href="javascript:void(0)" prefix="Group2">
-      [Platform]
+    <cv-header-name href="javascript:void(0)">
+      Room Booking System
     </cv-header-name>
     <cv-header-nav aria-label="Carbon nav">
     <cv-header-menu-item href="javascript:void(0)">

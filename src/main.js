@@ -4,6 +4,7 @@ import router from './router'
 import App from './App.vue'
 import './styles/carbon-g90.css'
 import './styles/tailwind.css'
+import './styles/global.css'
 
 
 const app = createApp(App)
