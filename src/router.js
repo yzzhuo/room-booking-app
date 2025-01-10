@@ -9,15 +9,25 @@ const router = createRouter({
       name: "home",
       component: HomeView,
     },
+    // {
+    //   path: "/about",
+    //   name: "about",
+    //   component: () => import("./pages/AboutView.vue"),
+    // },
     {
-      path: "/about",
-      name: "about",
-      component: () => import("./pages/AboutView.vue"),
+      path: "/rooms",
+      name: "roomlist",
+      component: () => import("./pages/RoomList.vue"),
     },
     {
-      path: "/pagedetail",
-      name: "pagedetail",
+      path: "/room",
+      name: "room",
       component: () => import("./pages/RoomDetail.vue"),
+    },
+    {
+      path: "/bookings",
+      name: "bookinglist",
+      component: () => import("./pages/BookingList.vue"),
     },
   ],
 });

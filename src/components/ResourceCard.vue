@@ -25,8 +25,11 @@
 
 <script setup>
 import ArrowRight32 from '@carbon/icons-vue/es/arrow--right/32';
+import { useRouter } from 'vue-router';
 
-defineProps({
+const router = useRouter();
+
+const props = defineProps({
   title: {
     type: String,
     required: true
@@ -34,12 +37,19 @@ defineProps({
   to: {
     type: [String, Object],
     default: null
+  },
+  link: {
+    type: String,
+    default: null
   }
 });
 
-const emit = defineEmits(['click']);
 
 const handleClick = () => {
-  emit('click');
+  if (props.link) {
+    router.push(props.link);
+  }
 };
+
+
 </script>
