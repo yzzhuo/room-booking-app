@@ -44,6 +44,25 @@ Open http://localhost:5173/ in your browser.
 ```
 Use a descriptive branch name (e.g., feature/room-list-page).
 
+### Pull lastest updates from the original repository (often called "upstream"):
+1. First, add the original repository as a remote (you only need to do this once):
+``` bash
+git remote add upstream https://github.com/yzzhuo/room-booking-app.git
+```
+
+2. Fetch all the branches and their respective commits from the upstream repository:
+```
+git fetch upstream
+```
+
+3. Make sure you're on your local main branch:
+```
+git rebase upstream/main
+```
+If you run into any merge conflicts, you'll need to resolve them manually. The rebase approach will give you a cleaner history but should only be used if you haven't shared your changes with others yet.
+
+Alternative approach using merge (instead of rebase)
+
 ### Submitting Changes
 1.	Commit your changes with a clear message:
 ```
