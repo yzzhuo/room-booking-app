@@ -21,31 +21,8 @@
 
     <!-- Available Rooms -->
     <section>
-      <h2 class="text-xl font-semibold mb-4">Available Room</h2>
-      <div class="border-2 border-gray-200 rounded p-4">
-        <!-- Search -->
-        <input 
-          type="text" 
-          placeholder="Search Here"
-          class="w-full border-2 border-gray-200 rounded p-2 mb-4"
-        >
-
-        <!-- Filters -->
-        <div class="flex gap-4 mb-4">
-          <label class="flex items-center gap-2">
-            <input 
-              type="checkbox" 
-              v-model="filters.projector"
-            > Projector
-          </label>
-          <label class="flex items-center gap-2">
-            <input 
-              type="checkbox" 
-              v-model="filters.whiteboard"
-            > Whiteboard
-          </label>
-        </div>
-
+      <h2 class="text-xl font-semibold mb-4">Frenquent Booking Room</h2>
+      <div class="border-2 border-gray-200 rounded p-0">
         <!-- Room Grid -->
         <div class="grid grid-cols-3 gap-4">
           <div 
@@ -53,7 +30,7 @@
             :key="room.id"
             class="border rounded p-4"
           >
-            <div class="bg-gray-200 aspect-video mb-2">Image</div>
+            <img class="aspect-video" :src="room.imageUrl" alt="Room Image">
             <div class="flex justify-between">
               <div>
                 <h3 class="font-medium">{{ room.name }}</h3>
@@ -81,6 +58,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import ResourceCard from '../components/ResourceCard.vue';
 import { CvButton } from '@carbon/vue';
+import roomInfo from '../data/room-info.json';
 
 const router = useRouter();
 
@@ -92,37 +70,7 @@ const upcomingBookings = ref([
   }
 ]);
 
-const rooms = ref([
-  {
-    id: 1,
-    name: 'Conference A',
-    capacity: 20,
-    floor: 1,
-    hasProjector: true,
-    image: '/room-placeholder.jpg'
-  },
-  {
-    id: 2,
-    name: 'Conference A',
-    capacity: 20,
-    floor: 1,
-    hasProjector: true,
-    image: '/room-placeholder.jpg'
-  },
-  {
-    id: 3,
-    name: 'Conference A',
-    capacity: 20,
-    floor: 1,
-    hasProjector: true,
-    image: '/room-placeholder.jpg'
-  }
-]);
-
-const filters = ref({
-  projector: false,
-  whiteboard: false
-});
+const rooms = ref(roomInfo.favourite_rooms);
 
 const openBookingModal = () => {
   // TODO: Implement booking modal

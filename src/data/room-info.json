@@ -1,0 +1,584 @@
+{
+  "favourite_rooms": [
+    {
+      "id": 5,
+      "name": "Meeting Room 1",
+      "capacity": 8,
+      "floor": 2,
+      "amenities": [
+        "Whiteboard",
+        "Video Conferencing"
+      ],
+      "imageUrl": "/room-placeholder.jpg",
+      "bookings": [
+        {
+          "id": 1,
+          "room": "279",
+          "time": "13:00 to 16:00",
+          "subject": "Meeting",
+          "attendees": "EIT Digital Master Students"
+        },
+        {
+          "id": 2,
+          "room": "275",
+          "time": "14:00 to 17:00",
+          "subject": "Meeting",
+          "attendees": "EIT Digital Master Students"
+        },
+        {
+          "id": 3,
+          "room": "215",
+          "time": "16:00 to 16:30",
+          "subject": "Meeting",
+          "attendees": "Roberto Lumbreras"
+        },
+        {
+          "id": 4,
+          "room": "249",
+          "time": "16:00 to 17:00",
+          "subject": "Meeting",
+          "attendees": "Elvira Moreno"
+        },
+        {
+          "id": 5,
+          "room": "215",
+          "time": "16:30 to 17:30",
+          "subject": "[Entrevista] Adrián Bellver",
+          "attendees": "Andrea Iannetta"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Meeting Room 2",
+      "capacity": 14,
+      "floor": 3,
+      "amenities": [
+        "Whiteboard"
+      ],
+      "imageUrl": "/room-placeholder.jpg",
+      "bookings": [
+        {
+          "id": 1,
+          "room": "279",
+          "time": "13:00 to 16:00",
+          "subject": "Meeting",
+          "attendees": "EIT Digital Master Students"
+        },
+        {
+          "id": 2,
+          "room": "275",
+          "time": "14:00 to 17:00",
+          "subject": "Meeting",
+          "attendees": "EIT Digital Master Students"
+        },
+        {
+          "id": 3,
+          "room": "215",
+          "time": "16:00 to 16:30",
+          "subject": "Meeting",
+          "attendees": "Roberto Lumbreras"
+        },
+        {
+          "id": 4,
+          "room": "249",
+          "time": "16:00 to 17:00",
+          "subject": "Meeting",
+          "attendees": "Elvira Moreno"
+        },
+        {
+          "id": 5,
+          "room": "215",
+          "time": "16:30 to 17:30",
+          "subject": "[Entrevista] Adrián Bellver",
+          "attendees": "Andrea Iannetta"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Boardroom",
+      "capacity": 10,
+      "floor": 1,
+      "amenities": [
+        "Whiteboard",
+        "Projector",
+        "Video Conferencing",
+        "Screen"
+      ],
+      "imageUrl": "/room-placeholder.jpg",
+      "bookings": [
+        {
+          "id": 1,
+          "room": "279",
+          "time": "13:00 to 16:00",
+          "subject": "Meeting",
+          "attendees": "EIT Digital Master Students"
+        },
+        {
+          "id": 2,
+          "room": "275",
+          "time": "14:00 to 17:00",
+          "subject": "Meeting",
+          "attendees": "EIT Digital Master Students"
+        },
+        {
+          "id": 3,
+          "room": "215",
+          "time": "16:00 to 16:30",
+          "subject": "Meeting",
+          "attendees": "Roberto Lumbreras"
+        },
+        {
+          "id": 4,
+          "room": "249",
+          "time": "16:00 to 17:00",
+          "subject": "Meeting",
+          "attendees": "Elvira Moreno"
+        },
+        {
+          "id": 5,
+          "room": "215",
+          "time": "16:30 to 17:30",
+          "subject": "[Entrevista] Adrián Bellver",
+          "attendees": "Andrea Iannetta"
+        }
+      ]
+    }
+  ],
+  "rooms": [
+    {
+      "id": 1,
+      "name": "Conference A",
+      "capacity": 5,
+      "floor": 1,
+      "amenities": [
+        "Whiteboard",
+        "Projector",
+        "Video Conferencing"
+      ],
+      "imageUrl": "/room-placeholder.jpg",
+      "bookings": [
+        {
+          "id": 1,
+          "room": "279",
+          "time": "13:00 to 16:00",
+          "subject": "Meeting",
+          "attendees": "EIT Digital Master Students"
+        },
+        {
+          "id": 2,
+          "room": "275",
+          "time": "14:00 to 17:00",
+          "subject": "Meeting",
+          "attendees": "EIT Digital Master Students"
+        },
+        {
+          "id": 3,
+          "room": "215",
+          "time": "16:00 to 16:30",
+          "subject": "Meeting",
+          "attendees": "Roberto Lumbreras"
+        },
+        {
+          "id": 4,
+          "room": "249",
+          "time": "16:00 to 17:00",
+          "subject": "Meeting",
+          "attendees": "Elvira Moreno"
+        },
+        {
+          "id": 5,
+          "room": "215",
+          "time": "16:30 to 17:30",
+          "subject": "[Entrevista] Adrián Bellver",
+          "attendees": "Andrea Iannetta"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Conference B",
+      "capacity": 10,
+      "floor": 2,
+      "amenities": [
+        "Whiteboard"
+      ],
+      "imageUrl": "/room-placeholder.jpg",
+      "bookings": [
+        {
+          "id": 1,
+          "room": "279",
+          "time": "13:00 to 16:00",
+          "subject": "Meeting",
+          "attendees": "EIT Digital Master Students"
+        },
+        {
+          "id": 2,
+          "room": "275",
+          "time": "14:00 to 17:00",
+          "subject": "Meeting",
+          "attendees": "EIT Digital Master Students"
+        },
+        {
+          "id": 3,
+          "room": "215",
+          "time": "16:00 to 16:30",
+          "subject": "Meeting",
+          "attendees": "Roberto Lumbreras"
+        },
+        {
+          "id": 4,
+          "room": "249",
+          "time": "16:00 to 17:00",
+          "subject": "Meeting",
+          "attendees": "Elvira Moreno"
+        },
+        {
+          "id": 5,
+          "room": "215",
+          "time": "16:30 to 17:30",
+          "subject": "[Entrevista] Adrián Bellver",
+          "attendees": "Andrea Iannetta"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Main Conference Room",
+      "capacity": 30,
+      "floor": 3,
+      "amenities": [
+        "Projector"
+      ],
+      "imageUrl": "/room-placeholder.jpg",
+      "bookings": [
+        {
+          "id": 1,
+          "room": "279",
+          "time": "13:00 to 16:00",
+          "subject": "Meeting",
+          "attendees": "EIT Digital Master Students"
+        },
+        {
+          "id": 2,
+          "room": "275",
+          "time": "14:00 to 17:00",
+          "subject": "Meeting",
+          "attendees": "EIT Digital Master Students"
+        },
+        {
+          "id": 3,
+          "room": "215",
+          "time": "16:00 to 16:30",
+          "subject": "Meeting",
+          "attendees": "Roberto Lumbreras"
+        },
+        {
+          "id": 4,
+          "room": "249",
+          "time": "16:00 to 17:00",
+          "subject": "Meeting",
+          "attendees": "Elvira Moreno"
+        },
+        {
+          "id": 5,
+          "room": "215",
+          "time": "16:30 to 17:30",
+          "subject": "[Entrevista] Adrián Bellver",
+          "attendees": "Andrea Iannetta"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Training Room",
+      "capacity": 25,
+      "floor": 1,
+      "amenities": [
+        "Whiteboard",
+        "Projector",
+        "Screen"
+      ],
+      "imageUrl": "/room-placeholder.jpg",
+      "bookings": [
+        {
+          "id": 1,
+          "room": "279",
+          "time": "13:00 to 16:00",
+          "subject": "Meeting",
+          "attendees": "EIT Digital Master Students"
+        },
+        {
+          "id": 2,
+          "room": "275",
+          "time": "14:00 to 17:00",
+          "subject": "Meeting",
+          "attendees": "EIT Digital Master Students"
+        },
+        {
+          "id": 3,
+          "room": "215",
+          "time": "16:00 to 16:30",
+          "subject": "Meeting",
+          "attendees": "Roberto Lumbreras"
+        },
+        {
+          "id": 4,
+          "room": "249",
+          "time": "16:00 to 17:00",
+          "subject": "Meeting",
+          "attendees": "Elvira Moreno"
+        },
+        {
+          "id": 5,
+          "room": "215",
+          "time": "16:30 to 17:30",
+          "subject": "[Entrevista] Adrián Bellver",
+          "attendees": "Andrea Iannetta"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Meeting Room 1",
+      "capacity": 8,
+      "floor": 2,
+      "amenities": [
+        "Whiteboard",
+        "Video Conferencing"
+      ],
+      "imageUrl": "/room-placeholder.jpg",
+      "bookings": [
+        {
+          "id": 1,
+          "room": "279",
+          "time": "13:00 to 16:00",
+          "subject": "Meeting",
+          "attendees": "EIT Digital Master Students"
+        },
+        {
+          "id": 2,
+          "room": "275",
+          "time": "14:00 to 17:00",
+          "subject": "Meeting",
+          "attendees": "EIT Digital Master Students"
+        },
+        {
+          "id": 3,
+          "room": "215",
+          "time": "16:00 to 16:30",
+          "subject": "Meeting",
+          "attendees": "Roberto Lumbreras"
+        },
+        {
+          "id": 4,
+          "room": "249",
+          "time": "16:00 to 17:00",
+          "subject": "Meeting",
+          "attendees": "Elvira Moreno"
+        },
+        {
+          "id": 5,
+          "room": "215",
+          "time": "16:30 to 17:30",
+          "subject": "[Entrevista] Adrián Bellver",
+          "attendees": "Andrea Iannetta"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Meeting Room 2",
+      "capacity": 14,
+      "floor": 3,
+      "amenities": [
+        "Whiteboard"
+      ],
+      "imageUrl": "/room-placeholder.jpg",
+      "bookings": [
+        {
+          "id": 1,
+          "room": "279",
+          "time": "13:00 to 16:00",
+          "subject": "Meeting",
+          "attendees": "EIT Digital Master Students"
+        },
+        {
+          "id": 2,
+          "room": "275",
+          "time": "14:00 to 17:00",
+          "subject": "Meeting",
+          "attendees": "EIT Digital Master Students"
+        },
+        {
+          "id": 3,
+          "room": "215",
+          "time": "16:00 to 16:30",
+          "subject": "Meeting",
+          "attendees": "Roberto Lumbreras"
+        },
+        {
+          "id": 4,
+          "room": "249",
+          "time": "16:00 to 17:00",
+          "subject": "Meeting",
+          "attendees": "Elvira Moreno"
+        },
+        {
+          "id": 5,
+          "room": "215",
+          "time": "16:30 to 17:30",
+          "subject": "[Entrevista] Adrián Bellver",
+          "attendees": "Andrea Iannetta"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Boardroom",
+      "capacity": 10,
+      "floor": 1,
+      "amenities": [
+        "Whiteboard",
+        "Projector",
+        "Video Conferencing",
+        "Screen"
+      ],
+      "imageUrl": "/room-placeholder.jpg",
+      "bookings": [
+        {
+          "id": 1,
+          "room": "279",
+          "time": "13:00 to 16:00",
+          "subject": "Meeting",
+          "attendees": "EIT Digital Master Students"
+        },
+        {
+          "id": 2,
+          "room": "275",
+          "time": "14:00 to 17:00",
+          "subject": "Meeting",
+          "attendees": "EIT Digital Master Students"
+        },
+        {
+          "id": 3,
+          "room": "215",
+          "time": "16:00 to 16:30",
+          "subject": "Meeting",
+          "attendees": "Roberto Lumbreras"
+        },
+        {
+          "id": 4,
+          "room": "249",
+          "time": "16:00 to 17:00",
+          "subject": "Meeting",
+          "attendees": "Elvira Moreno"
+        },
+        {
+          "id": 5,
+          "room": "215",
+          "time": "16:30 to 17:30",
+          "subject": "[Entrevista] Adrián Bellver",
+          "attendees": "Andrea Iannetta"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Call Room 1",
+      "capacity": 2,
+      "floor": 4,
+      "amenities": [
+        "Video Conferencing",
+        "Screen"
+      ],
+      "imageUrl": "/room-placeholder.jpg",
+      "bookings": [
+        {
+          "id": 1,
+          "room": "279",
+          "time": "13:00 to 16:00",
+          "subject": "Meeting",
+          "attendees": "EIT Digital Master Students"
+        },
+        {
+          "id": 2,
+          "room": "275",
+          "time": "14:00 to 17:00",
+          "subject": "Meeting",
+          "attendees": "EIT Digital Master Students"
+        },
+        {
+          "id": 3,
+          "room": "215",
+          "time": "16:00 to 16:30",
+          "subject": "Meeting",
+          "attendees": "Roberto Lumbreras"
+        },
+        {
+          "id": 4,
+          "room": "249",
+          "time": "16:00 to 17:00",
+          "subject": "Meeting",
+          "attendees": "Elvira Moreno"
+        },
+        {
+          "id": 5,
+          "room": "215",
+          "time": "16:30 to 17:30",
+          "subject": "[Entrevista] Adrián Bellver",
+          "attendees": "Andrea Iannetta"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Call Room 2",
+      "capacity": 2,
+      "floor": 4,
+      "amenities": [
+        "Video Conferencing",
+        "Screen"
+      ],
+      "imageUrl": "/room-placeholder.jpg",
+      "bookings": [
+        {
+          "id": 1,
+          "room": "279",
+          "time": "13:00 to 16:00",
+          "subject": "Meeting",
+          "attendees": "EIT Digital Master Students"
+        },
+        {
+          "id": 2,
+          "room": "275",
+          "time": "14:00 to 17:00",
+          "subject": "Meeting",
+          "attendees": "EIT Digital Master Students"
+        },
+        {
+          "id": 3,
+          "room": "215",
+          "time": "16:00 to 16:30",
+          "subject": "Meeting",
+          "attendees": "Roberto Lumbreras"
+        },
+        {
+          "id": 4,
+          "room": "249",
+          "time": "16:00 to 17:00",
+          "subject": "Meeting",
+          "attendees": "Elvira Moreno"
+        },
+        {
+          "id": 5,
+          "room": "215",
+          "time": "16:30 to 17:30",
+          "subject": "[Entrevista] Adrián Bellver",
+          "attendees": "Andrea Iannetta"
+        }
+      ]
+    }
+  ]
+}

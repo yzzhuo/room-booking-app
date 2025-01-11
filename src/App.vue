@@ -1,19 +1,21 @@
 <template>
-  <cv-header aria-label="Carbon header">
-    <!-- <cv-skip-to-content href="#main-content">
-      Skip to content
-    </cv-skip-to-content> -->
+  <cv-header aria-label="Carbon header" class="flex justify-between">
     <cv-header-name href="javascript:void(0)">
       <RouterLink to="/">Room Booking System</RouterLink>
     </cv-header-name>
-    <!-- <cv-header-nav aria-label="Carbon nav">
-      <cv-header-menu-item href="javascript:void(0)">
-        <RouterLink to="/">Home</RouterLink>
-      </cv-header-menu-item>
-      <cv-header-menu-item href="javascript:void(0)">
-        <RouterLink to="/about">About</RouterLink>
-      </cv-header-menu-item>
-    </cv-header-nav> -->
+
+    <cv-header-global class="ml-auto">
+      <cv-header-global-action aria-label="User profile" class="w-40">
+        <div class="flex items-center gap-2 px-4">
+          <img 
+            :src="currentUser.avatar" 
+            :alt="`${currentUser.name}'s avatar`" 
+            class="w-8 h-8 rounded-full"
+          />
+          <span class="text-white">{{ currentUser.name }}</span>
+        </div>
+      </cv-header-global-action>
+    </cv-header-global>
   </cv-header>
   <main class="mt-16 ml-12">
     <RouterView />
@@ -21,6 +23,10 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import userInfo from './data/user-info.json';
+const currentUser = ref(userInfo.currentUser);
+
 </script>
 
 <style lang="scss">

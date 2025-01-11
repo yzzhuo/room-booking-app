@@ -1,0 +1,8 @@
+{
+  "currentUser": {
+    "id": "1",
+    "name": "Maria Chen",
+    "email": "maria.chen@example.com",
+    "avatar": "/avatar.png"
+  }
+}

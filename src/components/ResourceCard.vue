@@ -1,14 +1,14 @@
 <!-- src/components/ClickableCard.vue -->
 <template>
-  <div
-    class="bg-white p-8 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+  <cv-tile 
+    class="bg-white cursor-pointer"
     @click="handleClick"
     @keydown.enter="handleClick"
     tabindex="0"
     role="button"
     :aria-label="title"
   >
-    <h3 class="">{{ title }}</h3>
+    <h3 class="text-lg">{{ title }}</h3>
     <div class="flex justify-between items-center">
       <slot name="icon">
         <!-- Default Hexagon Icon -->
@@ -20,7 +20,7 @@
         <ArrowRight32 />
       </slot>
     </div>
-  </div>
+  </cv-tile>
 </template>
 
 <script setup>

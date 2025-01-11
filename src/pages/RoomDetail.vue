@@ -1,68 +1,70 @@
 <!-- src/pages/RoomDetail.vue -->
 <template>
   <div class="min-h-screen bg-gray-50">
-    <main class="max-w-7xl mx-auto p-6">
+    <main class="max-w-7xl mx-auto p-6" v-if="room">
       <!-- Breadcrumb -->
-      <nav class="text-sm mb-6">
-        <ol class="flex items-center space-x-2">
-          <li><a href="#" class="text-blue-600 hover:underline">Home</a></li>
-          <li class="text-gray-500">&gt;</li>
-          <li><a href="#" class="text-blue-600 hover:underline">Room</a></li>
-          <li class="text-gray-500">&gt;</li>
-          <li class="text-gray-600">Group room 5</li>
-        </ol>
-      </nav>
+      <cv-breadcrumb class="mb-6">
+        <cv-breadcrumb-item>Home</cv-breadcrumb-item>
+        <cv-breadcrumb-item>Room</cv-breadcrumb-item>
+        <cv-breadcrumb-item>{{ room.name }}</cv-breadcrumb-item>
+      </cv-breadcrumb>
 
       <!-- Room Info -->
       <div class="grid md:grid-cols-2 gap-8 mb-8">
         <div>
-          <h2 class="text-2xl font-semibold mb-4">Room 275</h2>
+          <h2 class="text-2xl font-semibold mb-4">{{ room.name }}</h2>
           
           <div class="flex gap-6 mb-6">
             <div class="flex items-center gap-2">
               <GroupIcon32 class="w-5 h-5 text-gray-600" />
-              <span>46 persons</span>
+              <span>{{ room.capacity }} persons</span>
             </div>
-            <div class="flex items-center gap-2">
-              <TimeIcon32 class="w-5 h-5 text-green-600" />
-              <span class="text-green-600">Available now</span>
-            </div>
+            <cv-tag label="Available now" kind="green"/>
           </div>
 
           <div class="mb-6">
             <h3 class="font-semibold mb-3">Equipment</h3>
             <div class="grid grid-cols-2 gap-4">
-              <div>
-                <div class="font-medium">Seats</div>
-                <div class="text-gray-600">HDMI</div>
-              </div>
-              <div>
-                <div class="font-medium">Table or tables</div>
-                <div class="text-gray-600">Screen</div>
+              <div v-for="amenity in room.amenities" :key="amenity">
+                <div class="text-gray-600">{{ amenity }}</div>
               </div>
             </div>
           </div>
 
           <div>
-            <h3 class="font-semibold mb-3">Booking Details</h3>
-            <ul class="text-sm text-gray-600 space-y-2">
-              <li>You can make bookings 3 months in advance.</li>
-              <li>The duration of the booking should be between 30 minutes - 3 hours.</li>
-              <li>You can have up to one booking at a time.</li>
-            </ul>
-            <div class="mt-4 space-y-2">
-              <button class="text-blue-600 hover:underline">Cancellation terms</button>
-              <br>
-              <button class="text-blue-600 hover:underline">Terms of Agreement</button>
-            </div>
+            <h3 class="font-semibold mb-3">Details</h3>
+            <cv-accordion @change="onChange" :align="align" :size="size">
+              <cv-accordion-item title="Booking Details">
+                <template v-slot:title>Booking Instructions</template>
+                <template v-slot:content>
+                  <ul class="text-sm text-gray-600 space-y-2">
+                    <li>You can make bookings 3 months in advance.</li>
+                    <li>The duration of the booking should be between 30 minutes - 3 hours.</li>
+                    <li>You can have up to one booking at a time.</li>
+                  </ul>
+                </template>
+              </cv-accordion-item>
+              <cv-accordion-item title="Cancellation terms">
+                <template v-slot:title>Cancellation terms</template>
+                <template v-slot:content>
+                  <p class="text-sm text-gray-600">Cancellation terms content goes here.</p>
+                </template>
+              </cv-accordion-item>
+              <cv-accordion-item title="Terms of Agreement">
+                <template v-slot:title>Terms of Agreement</template>
+                <template v-slot:content>
+                  <p class="text-sm text-gray-600">Terms of Agreement content goes here.</p>
+                </template>
+              </cv-accordion-item>
+            </cv-accordion>
           </div>
         </div>
 
         <div class="bg-gray-100 rounded-lg">
           <img 
-            src="" 
-            alt="Room 275" 
-            class="w-full h-full object-cover rounded-lg"
+            :src="room.imageUrl" 
+            :alt="room.name" 
+            class="w-full object-cover rounded-lg"
           />
         </div>
       </div>
@@ -71,114 +73,100 @@
       <section>
         <div class="flex justify-between items-center mb-6">
           <h3 class="text-xl font-semibold">Bookings</h3>
-          <div class="flex gap-4 items-center">
-            <input 
-              type="date" 
-              v-model="selectedDate"
-              class="border rounded px-3 py-2"
-            >
-            <button 
-              @click="openBookingModal"
-              class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-            >
-              Book
-            </button>
+          <div class="flex gap-4">
+            <cv-date-picker v-bind='args' kind="single" :value="now" :cal-options="calOptions" @dateChange="onDateChange">
+            </cv-date-picker>
+            <cv-button class="self-end" @click="openBookingModal" aria-label="Booking button" default="Book" size="field">Book</cv-button>
           </div>
         </div>
 
         <!-- Bookings Table -->
         <div class="bg-white rounded-lg shadow overflow-hidden">
-          <table class="w-full">
-            <thead class="bg-gray-200">
-              <tr>
-                <th class="px-4 py-3 text-left">Room</th>
-                <th class="px-4 py-3 text-left">Time</th>
-                <th class="px-4 py-3 text-left">Subject</th>
-                <th class="px-4 py-3 text-left">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="booking in bookings" :key="booking.id" class="border-t">
-                <td class="px-4 py-3">{{ booking.room }}</td>
-                <td class="px-4 py-3">{{ booking.time }}</td>
-                <td class="px-4 py-3">
-                  <div class="font-medium">{{ booking.subject }}</div>
-                  <div class="text-sm text-gray-600">{{ booking.attendees }}</div>
-                </td>
-                <td class="px-4 py-3">
+          <cv-data-table>
+            <template #headings>
+              <cv-data-table-heading id="time" heading="Time"/>
+              <cv-data-table-heading id="subject" heading="Subject"/>
+              <cv-data-table-heading id="sb-standard" heading="Actions" />
+            </template>
+            <template #data>
+              <cv-data-table-row v-for="row in bookings" :id="row.id" :key="row.time" :value="row.name">
+                <cv-data-table-cell>{{row.time}}</cv-data-table-cell>
+                <cv-data-table-cell>
+                  <div>
+                    <div class="font-semibold">{{row.subject}}</div>
+                    <div class="text-gray-600">{{row.attendees}}</div>
+                  </div>
+                </cv-data-table-cell>
+                <cv-data-table-cell>
                   <div class="flex gap-2">
                     <button 
-                      @click="editBooking(booking)"
+                      @click="editBooking(row)"
                       class="text-blue-600 hover:underline"
                     >
                       Edit
                     </button>
                     <button 
-                      @click="deleteBooking(booking)"
+                      @click="deleteBooking(row)"
                       class="text-red-600 hover:underline"
                     >
                       Delete
                     </button>
                   </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                </cv-data-table-cell>
+              </cv-data-table-row>
+            </template>
+          </cv-data-table>
         </div>
       </section>
     </main>
+    <BookingModal
+      :is-open="isBookingModalOpen"
+      :room-id="roomId"
+      @close="closeBookingModal"
+      @create="handleBookingCreate"
+    />
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 import GroupIcon32 from '@carbon/icons-vue/es/group/32';
 import TimeIcon32 from '@carbon/icons-vue/es/time/32';
+import roomInfo from '../data/room-info.json';
+import { CvDataTable } from '@carbon/vue';
+import BookingModal from '../components/BookingModal.vue';
 
+const route = useRoute();
+const room = ref(null);
+const isBookingModalOpen = ref(false);
+
+const bookings = ref([]);
+
+const now = new Date();
+const nextWeek = new Date();
+nextWeek.setDate(now.getDate() + 7);
+const calOptions = ref({
+  minDate: now,
+  maxDate: nextWeek,
+  dateFormat: 'm/d/Y'
+})
+
+onMounted(() => {
+  const roomId = parseInt(route.params.id);
+  room.value = roomInfo.rooms.find(r => `${r.id}` == `${roomId}`)
+  bookings.value = room.value.bookings;
+  console.log('bookings:', bookings.value);
+});
 
 const selectedDate = ref(new Date().toISOString().split('T')[0]);
 
-const bookings = ref([
-  {
-    id: 1,
-    room: '279',
-    time: '13:00 to 16:00',
-    subject: 'Meeting',
-    attendees: 'EIT Digital Master Students'
-  },
-  {
-    id: 2,
-    room: '275',
-    time: '14:00 to 17:00',
-    subject: 'Meeting',
-    attendees: 'EIT Digital Master Students'
-  },
-  {
-    id: 3,
-    room: '215',
-    time: '16:00 to 16:30',
-    subject: 'Meeting',
-    attendees: 'Roberto Lumbreras'
-  },
-  {
-    id: 4,
-    room: '249',
-    time: '16:00 to 17:00',
-    subject: 'Meeting',
-    attendees: 'Elvira Moreno'
-  },
-  {
-    id: 5,
-    room: '215',
-    time: '16:30 to 17:30',
-    subject: '[Entrevista] Adrián Bellver',
-    attendees: 'Andrea Iannetta'
-  }
-]);
-
 const openBookingModal = () => {
-  // Implement booking modal logic
-  console.log('Opening booking modal');
+  isBookingModalOpen.value = true;
+};
+
+const closeBookingModal = () => {
+  isBookingModalOpen.value = false;
 };
 
 const editBooking = (booking) => {

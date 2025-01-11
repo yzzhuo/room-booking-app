@@ -59,9 +59,8 @@
         <div class="grid grid-cols-3 gap-4">
           <div 
             v-for="room in filteredRooms" :key="room.id"
-            class="border rounded p-4"
+            class="border rounded p-4 bg-white"
           >
-            <div class="bg-gray-200 aspect-video mb-2">Image</div>
             <img :src="room.imageUrl" alt="Room Image">
             <div class="flex justify-between">
               <div>
@@ -85,84 +84,12 @@
 </template>
 
 <script>
-  import { CvButton } from '@carbon/vue';
-    export default {
-        data() {
+import roomInfo from '../data/room-info.json';
+
+export default {
+    data() {
         return {
-            rooms: [
-            {
-                id: 1,
-                name: 'Conference A',
-                capacity: 5,
-                floor: 1,
-                amenities: ["Whiteboard", "Projector", "Video Conferencing"],
-                image: '/room-placeholder.jpg'
-            },
-            {
-                id: 2,
-                name: 'Conference B',
-                capacity: 10,
-                floor: 2,
-                amenities: ["Whiteboard"],
-                image: '/room-placeholder.jpg'
-            },
-            {
-                id: 3,
-                name: 'Main Conference Room',
-                capacity: 30,
-                floor: 3,
-                amenities: ["Projector"],
-                image: '/room-placeholder.jpg'
-            },
-            {
-                id: 4,
-                name: 'Training Room',
-                capacity: 25,
-                floor: 1,
-                amenities: ["Whiteboard", "Projector", "Screen"],
-                image: '/room-placeholder.jpg'
-            },
-            {
-                id: 5,
-                name: 'Meeting Room 1',
-                capacity: 8,
-                floor: 2,
-                amenities: ["Whiteboard", "Video Conferencing"],
-                image: '/room-placeholder.jpg'
-            },
-            {
-                id: 6,
-                name: 'Meeting Room 2',
-                capacity: 14,
-                floor: 3,
-                amenities: ["Whiteboard"],
-                image: '/room-placeholder.jpg'
-            },
-            {
-                id: 7,
-                name: 'Boardroom',
-                capacity: 10,
-                floor: 1,
-                amenities: ["Whiteboard", "Projector", "Video Conferencing", "Screen"],
-                image: '/room-placeholder.jpg'
-            },
-            {
-                id: 8,
-                name: 'Call Room 1',
-                capacity: 2,
-                floor: 4,
-                amenities: ["Video Conferencing", "Screen"],
-                image: '/room-placeholder.jpg'
-            },
-            {
-                id: 9,
-                name: 'Call Room 2',
-                capacity: 2,
-                floor: 4,
-                amenities: ["Video Conferencing", "Screen"],
-                image: '/room-placeholder.jpg'
-            },
-            ],
+            rooms: roomInfo.rooms,
             capacities: [
             '', // All capacities
             '2',
@@ -181,51 +108,59 @@
             '40', 
             ],
             floors: ['', // All floors
-              '1', 
-              '2', 
-              '3', 
-              '4', 
-              '5', 
-              '6',
+                '1', 
+                '2', 
+                '3', 
+                '4', 
+                '5', 
+                '6',
                     ],
             selectedFloor: '',
             selectedCapacity: '',
             selectedAmenities: [],
             searchQuery: '',
             };
-        },
-        computed: {
-        allAmenities() {
-            return [...new Set(this.rooms.flatMap(room => room.amenities))];
-        },
-        filteredRooms() {
-        return this.rooms
-            .filter(room => 
-            room.name.toLowerCase().includes(this.searchQuery.toLowerCase()) 
-            )
-            .filter(room => {
-            if (this.selectedFloor) {
-                return parseInt(this.selectedFloor) == room.floor;
-            }
-            return true;
-            })
-            .filter(room => {
-            if (this.selectedCapacity) {
-                return room.capacity >= parseInt(this.selectedCapacity); 
-            } else {
-                return true; 
-            }
-            })
-            .filter(room => {
-            if (this.selectedAmenities.length > 0 && !this.selectedAmenities.every(amenity => room.amenities.includes(amenity))) {
-                return false;
-            }
-            return true;
-            })
-            .sort((a, b) => a.capacity - b.capacity); 
-        },
-        },
-    };
+    },
+    computed: {
+    allAmenities() {
+        return [...new Set(this.rooms.flatMap(room => room.amenities))];
+    },
+    filteredRooms() {
+    return this.rooms
+        .filter(room => 
+        room.name.toLowerCase().includes(this.searchQuery.toLowerCase()) 
+        )
+        .filter(room => {
+        if (this.selectedFloor) {
+            return parseInt(this.selectedFloor) == room.floor;
+        }
+        return true;
+        })
+        .filter(room => {
+        if (this.selectedCapacity) {
+            return room.capacity >= parseInt(this.selectedCapacity); 
+        } else {
+            return true; 
+        }
+        })
+        .filter(room => {
+        if (this.selectedAmenities.length > 0 && !this.selectedAmenities.every(amenity => room.amenities.includes(amenity))) {
+            return false;
+        }
+        return true;
+        })
+        .sort((a, b) => a.capacity - b.capacity); 
+    },
+    },
+    methods: {
+    bookRoom(roomId) {
+      this.$router.push({
+        name: 'room',
+        params: { id: roomId }
+      });
+    }
+  }
+};
 </script>
 
 <style>
