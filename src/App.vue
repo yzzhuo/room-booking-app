@@ -1,4 +1,7 @@
 <template>
+  <div id="app">
+    <router-view />
+  </div> 
   <cv-header aria-label="Carbon header">
     <cv-skip-to-content href="#main-content">
       Skip to content
@@ -18,6 +21,7 @@
   <main class="mt-16 ml-12">
     <RouterView />
   </main>
+  
 </template>
 
 <script setup>
