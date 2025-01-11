@@ -12,10 +12,10 @@
     <section class="mb-8">
       <h2 class="text-xl font-semibold mb-4">Upcoming Bookings</h2>
       <div class="rounded p-4">
-        <div v-for="booking in upcomingBookings" :key="booking.room" class="p-4 border-solid border-2 border-gray-300 rounded">
+        <cv-tile v-for="booking in upcomingBookings" :key="booking.room" class="p-4 bg-white">
           <h3 class="text-lg font-medium">{{ booking.title }}</h3>
           <p class="text-gray-600">Room {{ booking.room }} · {{ booking.date }}</p>
-        </div>
+        </cv-tile>
       </div>
     </section>
 
@@ -25,28 +25,12 @@
       <div class="border-2 border-gray-200 rounded p-0">
         <!-- Room Grid -->
         <div class="grid grid-cols-3 gap-4">
-          <div 
+          <RoomCard
             v-for="room in rooms" 
             :key="room.id"
-            class="border rounded p-4"
-          >
-            <img class="aspect-video" :src="room.imageUrl" alt="Room Image">
-            <div class="flex justify-between">
-              <div>
-                <h3 class="font-medium">{{ room.name }}</h3>
-                <p class="text-sm text-gray-600">Capacity: {{ room.capacity }}</p>
-                <p class="text-sm text-gray-600">Floor {{ room.floor }}</p>
-                <p class="text-sm text-gray-600 mb-2">Projector Available</p>
-              </div>
-              <CvButton
-                @click="bookRoom(room.id)"
-                kind="secondary"
-                class="self-end"
-              >
-                Book
-              </CvButton>
-            </div>
-          </div>
+            :room="room"
+            @book="bookRoom"
+          />
         </div>
       </div>
     </section>
@@ -57,7 +41,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import ResourceCard from '../components/ResourceCard.vue';
-import { CvButton } from '@carbon/vue';
+import RoomCard from '../components/RoomCard.vue';
 import roomInfo from '../data/room-info.json';
 
 const router = useRouter();

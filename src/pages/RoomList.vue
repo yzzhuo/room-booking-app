@@ -57,34 +57,20 @@
 
         <!-- Room Grid -->
         <div class="grid grid-cols-3 gap-4">
-          <div 
-            v-for="room in filteredRooms" :key="room.id"
-            class="border rounded p-4 bg-white"
-          >
-            <img :src="room.imageUrl" alt="Room Image">
-            <div class="flex justify-between">
-              <div>
-                <h3 class="font-medium">{{ room.name }}</h3>
-                <p class="text-sm text-gray-600">Capacity: {{ room.capacity }}</p>
-                <p class="text-sm text-gray-600">Floor {{ room.floor }}</p>
-                <p class="text-sm text-gray-600 mb-2">Amenities: {{ room.amenities.join(', ') }}</p>
-              </div>
-              <CvButton
-                @click="bookRoom(room.id)"
-                kind="secondary"
-                class="self-end"
-              >
-                Book
-              </CvButton>
-            </div>
+          <RoomCard
+              v-for="room in filteredRooms" 
+              :key="room.id"
+              :room="room"
+              @book="bookRoom"
+            />
           </div>
-        </div>
       </div>
     </section>
 </template>
 
 <script>
 import roomInfo from '../data/room-info.json';
+import RoomCard from '../components/RoomCard.vue';
 
 export default {
     data() {
@@ -120,6 +106,9 @@ export default {
             selectedAmenities: [],
             searchQuery: '',
             };
+    },
+    components: {
+      RoomCard
     },
     computed: {
     allAmenities() {

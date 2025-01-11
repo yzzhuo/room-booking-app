@@ -24,10 +24,8 @@
 
           <div class="mb-6">
             <h3 class="font-semibold mb-3">Equipment</h3>
-            <div class="grid grid-cols-2 gap-4">
-              <div v-for="amenity in room.amenities" :key="amenity">
-                <div class="text-gray-600">{{ amenity }}</div>
-              </div>
+            <div>
+              {{ room.amenities.join(', ') }}
             </div>
           </div>
 
@@ -47,13 +45,18 @@
               <cv-accordion-item title="Cancellation terms">
                 <template v-slot:title>Cancellation terms</template>
                 <template v-slot:content>
-                  <p class="text-sm text-gray-600">Cancellation terms content goes here.</p>
+                  <p class="text-sm text-gray-600">Cancellations must be made at least 24 hours prior to the booking time to avoid a cancellation fee.</p>
                 </template>
               </cv-accordion-item>
               <cv-accordion-item title="Terms of Agreement">
                 <template v-slot:title>Terms of Agreement</template>
                 <template v-slot:content>
-                  <p class="text-sm text-gray-600">Terms of Agreement content goes here.</p>
+                  <cv-list >
+                    <cv-list-item>The room is to be used solely for professional purposes, including meetings and video conferencing.</cv-list-item>
+                    <cv-list-item>Users are responsible for leaving the room in the same condition as they found it. Any damage or excessive cleaning required will result in additional charges.</cv-list-item>
+                    <cv-list-item>Users must comply with all on-site policies and instructions provided by staff.</cv-list-item>
+                  </cv-list>
+                  <p class="text-sm text-gray-600">The room is to be used solely for professional purposes, including meetings and video conferencing.</p>
                 </template>
               </cv-accordion-item>
             </cv-accordion>
