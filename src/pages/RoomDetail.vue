@@ -89,7 +89,7 @@
             <template #headings>
               <cv-data-table-heading id="time" heading="Time"/>
               <cv-data-table-heading id="subject" heading="Subject"/>
-              <cv-data-table-heading id="sb-standard" heading="Actions" />
+              <cv-data-table-heading id="sb-standard" heading="Reserver" />
             </template>
             <template #data>
               <cv-data-table-row v-for="row in bookings" :id="row.id" :key="row.time" :value="row.name">
@@ -97,24 +97,10 @@
                 <cv-data-table-cell>
                   <div>
                     <div class="font-semibold">{{row.subject}}</div>
-                    <div class="text-gray-600">{{row.attendees}}</div>
                   </div>
                 </cv-data-table-cell>
                 <cv-data-table-cell>
-                  <div class="flex gap-2">
-                    <button 
-                      @click="editBooking(row)"
-                      class="text-blue-600 hover:underline"
-                    >
-                      Edit
-                    </button>
-                    <button 
-                      @click="deleteBooking(row)"
-                      class="text-red-600 hover:underline"
-                    >
-                      Delete
-                    </button>
-                  </div>
+                  {{row.attendees}}
                 </cv-data-table-cell>
               </cv-data-table-row>
             </template>
