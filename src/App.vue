@@ -1,14 +1,14 @@
 <template>
   <cv-header aria-label="Carbon header">
-    <cv-header-name href="javascript:void(0)">
+    <cv-header-name >
       <RouterLink to="/">Room Booking System</RouterLink>
     </cv-header-name>
 
     <cv-header-nav aria-label="Carbon nav">
-      <cv-header-menu-item href="javascript:void(0)">
+      <cv-header-menu-item >
         <RouterLink to="/rooms">Rooms</RouterLink>
       </cv-header-menu-item>
-      <cv-header-menu-item href="javascript:void(0)">
+      <cv-header-menu-item >
         <RouterLink to="/bookings">My Bookings</RouterLink>
       </cv-header-menu-item>
     </cv-header-nav>
