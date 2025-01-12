@@ -54,11 +54,7 @@ const upcomingBookings = ref([
   }
 ]);
 
-const rooms = ref(roomInfo.favourite_rooms);
-
-const openBookingModal = () => {
-  // TODO: Implement booking modal
-};
+const rooms = ref(roomInfo.rooms.filter(room => roomInfo.favourite_rooms.includes(room.id)));
 
 const bookRoom = (roomId) => {
   // TODO: Implement room booking

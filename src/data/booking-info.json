@@ -1,0 +1,36 @@
+{
+  "bookings": [
+    {
+      "roomId": 1,
+      "date": "2024-03-20",
+      "timeFrom": "09:00",
+      "timeTo": "10:30",
+      "subject": "Team Planning Meeting",
+      "status": "upcoming"
+    },
+    {
+      "roomId": 3,
+      "date": "2024-03-21",
+      "timeFrom": "14:00",
+      "timeTo": "15:00",
+      "subject": "Client Call",
+      "status": "upcoming"
+    },
+    {
+      "roomId": 2,
+      "date": "2024-02-22",
+      "timeFrom": "11:00",
+      "timeTo": "12:00",
+      "subject": "Project Review",
+      "status": "past"
+    },
+    {
+      "roomId": 4,
+      "date": "2024-03-22",
+      "timeFrom": "15:30",
+      "timeTo": "16:30",
+      "subject": "Interview",
+      "status": "cancelled"
+    }
+  ]
+}

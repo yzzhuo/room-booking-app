@@ -8,9 +8,9 @@
     :size="'sm'"
   >
     <template #label>New reservation</template>
-
+    <template v-slot:title>Room Booking</template>
     <template #content>
-      <div class="space-y-6">
+      <cv-form class="space-y-6">
         <!-- Subject -->
         <cv-text-input
           v-model="formData.subject"
@@ -45,7 +45,7 @@
           />
         </div>
         <cv-inline-notification v-if="showErrorNotification" kind="error" @action="onAction" @close="onClose" :subTitle="errorMessage" />
-      </div>
+      </cv-form>
     </template>
 
     <template #primary-button>
@@ -67,7 +67,7 @@ const props = defineProps({
     required: true
   },
   roomId: {
-    type: String,
+    type: Number,
     required: true
   }
 });

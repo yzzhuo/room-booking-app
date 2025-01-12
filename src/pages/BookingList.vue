@@ -7,13 +7,13 @@
       <!-- Upcoming Tab -->
       <cv-tab id="tab-upcoming" label="Upcoming">
         <section>
-          <!-- Table for Upcoming Bookings -->
           <div class="bg-white rounded-lg shadow overflow-hidden">
             <cv-data-table>
               <template #headings>
                 <cv-data-table-heading id="image" heading="Image" />
                 <cv-data-table-heading id="time" heading="Time" />
                 <cv-data-table-heading id="details" heading="Details" />
+                <cv-data-table-heading id="subject" heading="Subject" />
                 <cv-data-table-heading id="actions" heading="Actions" />
               </template>
               <template #data>
@@ -36,6 +36,7 @@
                       <div class="text-gray-600">{{ booking.date }}</div>
                     </div>
                   </cv-data-table-cell>
+                  <cv-data-table-cell>{{ booking.subject }}</cv-data-table-cell>
                   <cv-data-table-cell>
                     <div class="flex gap-2">
                       <button
@@ -45,7 +46,7 @@
                         Edit
                       </button>
                       <button
-                        @click="confirmCancel(booking)"
+                        @click="openCancelModal(booking)"
                         class="text-red-600 hover:underline"
                       >
                         Cancel
@@ -69,6 +70,7 @@
                 <cv-data-table-heading id="image" heading="Image" />
                 <cv-data-table-heading id="time" heading="Time" />
                 <cv-data-table-heading id="details" heading="Details" />
+                <cv-data-table-heading id="subject" heading="Subject" />
               </template>
               <template #data>
                 <cv-data-table-row
@@ -90,6 +92,7 @@
                       <div class="text-gray-600">{{ booking.date }}</div>
                     </div>
                   </cv-data-table-cell>
+                  <cv-data-table-cell>{{ booking.subject }}</cv-data-table-cell>
                 </cv-data-table-row>
               </template>
             </cv-data-table>
@@ -106,6 +109,7 @@
                 <cv-data-table-heading id="image" heading="Image" />
                 <cv-data-table-heading id="time" heading="Time" />
                 <cv-data-table-heading id="details" heading="Details" />
+                <cv-data-table-heading id="subject" heading="Subject" />
               </template>
               <template #data>
                 <cv-data-table-row
@@ -127,6 +131,7 @@
                       <div class="text-gray-600">{{ booking.date }}</div>
                     </div>
                   </cv-data-table-cell>
+                  <cv-data-table-cell>{{ booking.subject }}</cv-data-table-cell>
                 </cv-data-table-row>
               </template>
             </cv-data-table>
@@ -142,41 +147,62 @@
       @close="closeEditModal"
       @save="saveBooking"
     />
+    <CancelBookingModal
+      :is-open="isCancelModalOpen"
+      :booking="selectedBooking"
+      @close="closeCancelModal"
+      @confirm="handleBookingCancel"
+    />
   </div>
 </template>
 
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { CvDataTable } from '@carbon/vue';
 import BookingModal from '../components/BookingModal.vue';
+import CancelBookingModal from '../components/CancelBookingModal.vue';
+import bookingData from '../data/booking-info.json';
+import roomData from '../data/room-info.json';
 
 const selectedTab = ref('tab-upcoming');
 const isEditModalOpen = ref(false);
 const selectedBooking = ref(null);
+const isCancelModalOpen = ref(false);
 
-const upcomingBookings = ref([
-  { id: 1, room: 'Room 275', date: '2025-01-15', time: '10:00 - 12:00', image: '/src/assets/meeting-room-1.jpeg' },
-  { id: 2, room: 'Room 300', date: '2025-01-16', time: '14:00 - 16:00', image: '/src/assets/meeting-room-2.jpeg' },
-  { id: 3, room: 'Room 150', date: '2025-01-20', time: '09:00 - 10:00', image: '/src/assets/meeting-room-3.jpeg' },
-  { id: 4, room: 'Room 400', date: '2025-01-22', time: '08:30 - 09:30', image: '/src/assets/meeting-room-4.jpeg' },
-  { id: 5, room: 'Room 450', date: '2025-01-25', time: '12:00 - 13:00', image: '/src/assets/meeting-room-1.jpeg' },
-  { id: 6, room: 'Room 500', date: '2025-01-28', time: '14:00 - 15:30', image: '/src/assets/meeting-room-2.jpeg' },
-]);
+// Helper function to format time range
+const formatTimeRange = (timeFrom, timeTo) => `${timeFrom} - ${timeTo}`;
 
-const pastBookings = ref([
-  { id: 7, room: 'Room 150', date: '2025-01-10', time: '09:00 - 10:00', image: '/src/assets/meeting-room-3.jpeg' },
-  { id: 8, room: 'Room 180', date: '2025-01-08', time: '10:30 - 11:30', image: '/src/assets/meeting-room-4.jpeg' },
-  { id: 9, room: 'Room 190', date: '2025-01-06', time: '12:30 - 13:30', image: '/src/assets/meeting-room-1.jpeg' },
-  { id: 10, room: 'Room 200', date: '2025-01-04', time: '15:00 - 16:00', image: '/src/assets/meeting-room-2.jpeg' },
-]);
+// Transform bookings data to match the component's expected format
+const transformBooking = (booking) => {
+  const room = roomData.rooms.find(r => r.id === booking.roomId);
+  return {
+    id: booking.id,
+    room: room.name,
+    date: booking.date,
+    time: formatTimeRange(booking.timeFrom, booking.timeTo),
+    image: room.imageUrl,
+    subject: booking.subject
+  };
+};
+// Filter bookings by status
+const upcomingBookings = computed(() => 
+  bookingData.bookings
+    .filter(booking => booking.status === 'upcoming')
+    .map(transformBooking)
+);
 
-const cancelledBookings = ref([
-  { id: 11, room: 'Room 100', date: '2025-01-09', time: '08:00 - 09:00', image: '/src/assets/meeting-room-3.jpeg' },
-  { id: 12, room: 'Room 220', date: '2025-01-07', time: '11:00 - 12:00', image: '/src/assets/meeting-room-4.jpeg' },
-  { id: 13, room: 'Room 230', date: '2025-01-05', time: '13:00 - 14:00', image: '/src/assets/meeting-room-1.jpeg' },
-  { id: 14, room: 'Room 240', date: '2025-01-03', time: '15:30 - 16:30', image: '/src/assets/meeting-room-2.jpeg' },
-]);
+const pastBookings = computed(() => 
+  bookingData.bookings
+    .filter(booking => booking.status === 'past')
+    .map(transformBooking)
+);
+
+const cancelledBookings = computed(() => 
+  bookingData.bookings
+    .filter(booking => booking.status === 'cancelled')
+    .map(transformBooking)
+);
 
 const editBooking = (booking) => {
   selectedBooking.value = booking;
@@ -196,7 +222,23 @@ const saveBooking = (updatedBooking) => {
   closeEditModal();
 };
 
-const confirmCancel = (booking) => {
-  console.log('Cancelling:', booking);
+const openCancelModal = (booking) => {
+  selectedBooking.value = booking;
+  isCancelModalOpen.value = true;
+};
+
+const closeCancelModal = () => {
+  isCancelModalOpen.value = false;
+  selectedBooking.value = null;
+};
+
+const handleBookingCancel = async (booking) => {
+  try {
+    // Handle the booking cancellation
+    console.log('Booking cancelled:', booking);
+    // Refresh booking list or update UI as needed
+  } catch (error) {
+    console.error('Error:', error);
+  }
 };
 </script>
