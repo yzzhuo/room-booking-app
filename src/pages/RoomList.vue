@@ -2,57 +2,49 @@
     <section>
       <h2 class="text-xl font-semibold mb-4">Available Room</h2>
       <div class="border-2 border-gray-200 rounded p-4">
-        <div class="filters">
+        <div class="mb-8">
             <!-- Search -->
-            <div class="filter">
-            <label for="search">Search:</label>
-            <input 
-            type="text" 
-            id="search"
-            v-model="searchQuery"
-            placeholder="Search Here"
-            class="w-full border-2 border-gray-200 rounded p-2 mb-4"
-            >
+            <div class="mb-2">
+                <label for="search">Search:</label>
+                <cv-search 
+                    id="search"
+                    v-model="searchQuery"
+                    :light="true"
+                    label="Room Search"
+                    placeholder="Search Here"
+                    type="text" 
+                />
             </div>
 
             <!-- Other Filters -->
-            <div class="filter">
-                <div class="flex gap-4 mb-4">
-                    <label for="amenities">Amenities:</label>
-                        <div v-for="(amenity, index) in allAmenities" :key="index">
-                        <input type="checkbox" :id="'amenity_' + index" :value="amenity" v-model="selectedAmenities">
-                        <label :for="'amenity_' + index" class="w-full border-2 border-gray-200 rounded p-2 mb-4">{{ amenity }}</label>
-                        </div>
+            <div class="flex gap-2 mb-2 items-center">
+                <label>Amenities:</label>
+                <div class="flex gap-4 items-center">
+                    <cv-checkbox v-for="(amenity, index) in allAmenities" :key="index" :value="amenity" :label="amenity" v-model="selectedAmenities" />
                 </div>
             </div>
-            <div class="filter">
-                <div class="w-full border-2 border-gray-200 rounded p-2 mb-4">
-                    <cv-select
-                        @change="onChange"
-                        label="Capacity"
-                        light="true"
-                        id="capacity" 
-                        v-model="selectedCapacity"
-                        >
-                        <cv-select-option disabled selected hidden value="placeholder-item">Choose an option</cv-select-option>
-                        <cv-select-option v-for="capacity in capacities" :key="capacity" :value="capacity">{{ capacity }}</cv-select-option>
-                    </cv-select>
-                </div>
-            </div>
-            <div class="filter">
-                <div class="w-full border-2 border-gray-200 rounded p-2 mb-4">
-                    <cv-select
-                        @change="onChange"
-                        label="Floor"
-                        light="true"
-                        id="floor" 
-                        v-model="selectedFloor"
-                        >
-                        <cv-select-option disabled selected hidden value="placeholder-item">Choose an option</cv-select-option>
-                        <cv-select-option v-for="floor in floors" :key="floor" :value="floor">{{ floor }}</cv-select-option>
-                    </cv-select>
-                </div>
-            </div>
+
+            <cv-select
+                @change="onChange"
+                label="Capacity"
+                light="true"
+                id="capacity" 
+                v-model="selectedCapacity"
+                class="mb-2"
+            >
+                <cv-select-option disabled selected hidden value="placeholder-item">Choose an option</cv-select-option>
+                <cv-select-option v-for="capacity in capacities" :key="capacity" :value="capacity">{{ capacity }}</cv-select-option>
+            </cv-select>
+            <cv-select
+                @change="onChange"
+                label="Floor"
+                light="true"
+                id="floor" 
+                v-model="selectedFloor"
+            >
+                <cv-select-option disabled selected hidden value="placeholder-item">Choose an option</cv-select-option>
+                <cv-select-option v-for="floor in floors" :key="floor" :value="floor">{{ floor }}</cv-select-option>
+            </cv-select>
         </div>
 
         <!-- Room Grid -->

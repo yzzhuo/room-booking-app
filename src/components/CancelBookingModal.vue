@@ -2,6 +2,7 @@
   <cv-modal 
     :visible="isOpen" 
     kind="danger" 
+    :alert="true"
     @primary-click="handleConfirm"
     @secondary-click="handleClose"
     >

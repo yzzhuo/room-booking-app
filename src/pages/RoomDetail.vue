@@ -77,7 +77,7 @@
         <div class="flex justify-between items-center mb-6">
           <h3 class="text-xl font-semibold">Bookings</h3>
           <div class="flex gap-4">
-            <cv-date-picker v-bind='args' kind="single" :value="now" :cal-options="calOptions" @dateChange="onDateChange">
+            <cv-date-picker kind="single" v-model="selectedDate" :cal-options="calOptions" @dateChange="onDateChange">
             </cv-date-picker>
             <cv-button class="self-end" @click="openBookingModal" aria-label="Booking button" default="Book" size="field">Book</cv-button>
           </div>
@@ -110,7 +110,9 @@
     </main>
     <BookingModal
       :is-open="isBookingModalOpen"
-      :room-id="roomId"
+      :booking="{
+        date: selectedDate
+      }"
       @close="closeBookingModal"
       @create="handleBookingCreate"
     />
@@ -121,7 +123,6 @@
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import GroupIcon32 from '@carbon/icons-vue/es/group/32';
-import TimeIcon32 from '@carbon/icons-vue/es/time/32';
 import roomInfo from '../data/room-info.json';
 import { CvDataTable } from '@carbon/vue';
 import BookingModal from '../components/BookingModal.vue';
@@ -134,7 +135,7 @@ const bookings = ref([]);
 
 const now = new Date();
 const nextWeek = new Date();
-nextWeek.setDate(now.getDate() + 7);
+nextWeek.setDate(now.getDate() + 14);
 const calOptions = ref({
   minDate: now,
   maxDate: nextWeek,
@@ -148,7 +149,7 @@ onMounted(() => {
   console.log('bookings:', bookings.value);
 });
 
-const selectedDate = ref(new Date().toISOString().split('T')[0]);
+const selectedDate = ref(now);
 
 const openBookingModal = () => {
   isBookingModalOpen.value = true;

@@ -29,7 +29,7 @@
                       class="h-12 w-12 object-cover rounded-md"
                     />
                   </cv-data-table-cell>
-                  <cv-data-table-cell>{{ booking.time }}</cv-data-table-cell>
+                  <cv-data-table-cell>{{ booking.timeFrom }} - {{ booking.timeTo }}</cv-data-table-cell>
                   <cv-data-table-cell>
                     <div>
                       <div class="font-semibold">{{ booking.room }}</div>
@@ -85,7 +85,7 @@
                       class="h-12 w-12 object-cover rounded-md"
                     />
                   </cv-data-table-cell>
-                  <cv-data-table-cell>{{ booking.time }}</cv-data-table-cell>
+                  <cv-data-table-cell>{{ booking.timeFrom }} - {{ booking.timeTo }}</cv-data-table-cell>
                   <cv-data-table-cell>
                     <div>
                       <div class="font-semibold">{{ booking.room }}</div>
@@ -124,7 +124,7 @@
                       class="h-12 w-12 object-cover rounded-md"
                     />
                   </cv-data-table-cell>
-                  <cv-data-table-cell>{{ booking.time }}</cv-data-table-cell>
+                  <cv-data-table-cell>{{ booking.timeFrom }} - {{ booking.timeTo }}</cv-data-table-cell>
                   <cv-data-table-cell>
                     <div>
                       <div class="font-semibold">{{ booking.room }}</div>
@@ -143,7 +143,7 @@
     <!-- Booking Modal -->
     <BookingModal
       :is-open="isEditModalOpen"
-      :room-id="selectedBooking?.id"
+      :booking="selectedBooking"
       @close="closeEditModal"
       @save="saveBooking"
     />
@@ -170,17 +170,15 @@ const isEditModalOpen = ref(false);
 const selectedBooking = ref(null);
 const isCancelModalOpen = ref(false);
 
-// Helper function to format time range
-const formatTimeRange = (timeFrom, timeTo) => `${timeFrom} - ${timeTo}`;
 
 // Transform bookings data to match the component's expected format
 const transformBooking = (booking) => {
   const room = roomData.rooms.find(r => r.id === booking.roomId);
   return {
+    ...booking,
     id: booking.id,
     room: room.name,
     date: booking.date,
-    time: formatTimeRange(booking.timeFrom, booking.timeTo),
     image: room.imageUrl,
     subject: booking.subject
   };
@@ -206,6 +204,7 @@ const cancelledBookings = computed(() =>
 
 const editBooking = (booking) => {
   selectedBooking.value = booking;
+  console.log('editBooking', selectedBooking.value)
   isEditModalOpen.value = true;
 };
 

@@ -11,10 +11,10 @@
     <!-- Upcoming Bookings -->
     <section class="mb-8">
       <h2 class="text-xl font-semibold mb-4">Upcoming Bookings</h2>
-      <div class="rounded p-4">
-        <cv-tile v-for="booking in upcomingBookings" :key="booking.room" class="p-4 bg-white">
-          <h3 class="text-lg font-medium">{{ booking.title }}</h3>
-          <p class="text-gray-600">Room {{ booking.room }} · {{ booking.date }}</p>
+      <div class="rounded">
+        <cv-tile v-for="booking in upcomingBookings" :key="booking.room" class="mt-2 bg-white">
+          <h3 class="text-lg font-medium">{{ booking.subject }}</h3>
+          <p class="text-gray-600">{{ booking.room }} · {{ booking.location }} ·  {{ booking.date }}, {{ booking.time }}</p>
         </cv-tile>
       </div>
     </section>
@@ -43,16 +43,28 @@ import { useRouter } from 'vue-router';
 import ResourceCard from '../components/ResourceCard.vue';
 import RoomCard from '../components/RoomCard.vue';
 import roomInfo from '../data/room-info.json';
+import bookingInfo from '../data/booking-info.json';
+
+// Transform bookings data to match the component's expected format
+const transformBooking = (booking) => {
+  const room = roomInfo.rooms.find(r => r.id === booking.roomId);
+  return {
+    id: booking.id,
+    room: room.name,
+    date: booking.date,
+    time: `${booking.timeFrom} ~ ${booking.timeTo}`,
+    image: room.imageUrl,
+    subject: booking.subject,
+    location: `Floor ${room.floor}`,
+  };
+};
 
 const router = useRouter();
 
-const upcomingBookings = ref([
-  {
-    title: 'Team Meeting',
-    room: '275',
-    date: 'Dec 9, 5 pm'
-  }
-]);
+const upcomingBookings = ref(bookingInfo.bookings
+.filter(booking => booking.status === 'upcoming')
+.map(transformBooking)
+);
 
 const rooms = ref(roomInfo.rooms.filter(room => roomInfo.favourite_rooms.includes(room.id)));
 

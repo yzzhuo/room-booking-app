@@ -2,7 +2,7 @@
   "bookings": [
     {
       "roomId": 1,
-      "date": "2024-03-20",
+      "date": "2025-01-20",
       "timeFrom": "09:00",
       "timeTo": "10:30",
       "subject": "Team Planning Meeting",
@@ -10,7 +10,7 @@
     },
     {
       "roomId": 3,
-      "date": "2024-03-21",
+      "date": "2025-01-23",
       "timeFrom": "14:00",
       "timeTo": "15:00",
       "subject": "Client Call",
@@ -18,7 +18,7 @@
     },
     {
       "roomId": 2,
-      "date": "2024-02-22",
+      "date": "2024-12-22",
       "timeFrom": "11:00",
       "timeTo": "12:00",
       "subject": "Project Review",
@@ -26,7 +26,7 @@
     },
     {
       "roomId": 4,
-      "date": "2024-03-22",
+      "date": "2025-03-22",
       "timeFrom": "15:30",
       "timeTo": "16:30",
       "subject": "Interview",

@@ -6,17 +6,21 @@
     @primary-click="handleCreate"
     @secondary-click="closeModal"
     :size="'sm'"
+    ariaLabel="Booking detail modal"
   >
     <template #label>New reservation</template>
     <template v-slot:title>Room Booking</template>
     <template #content>
       <cv-form class="space-y-6">
         <!-- Subject -->
-        <cv-text-input
-          v-model="formData.subject"
-          label="Subject"
-          placeholder="Meeting"
-        />
+        <cv-form-item>
+          <cv-text-input
+            data-modal-primary-focus
+            v-model="formData.subject"
+            label="Subject"
+            placeholder="Meeting"
+          />
+        </cv-form-item>
 
         <!-- Date -->
         <cv-date-picker
@@ -29,17 +33,17 @@
         <!-- Time Range -->
         <div class="grid grid-cols-2 gap-4">
           <cv-time-picker
-            v-model="formData.timeFrom"
+            v-model:time="formData.timeFrom"
             label="From"
-            ampm
+            ampm="24"
             :invalid="timeFromInvalid"
             :invalidText="timeFromInvalidText"
           />
           
           <cv-time-picker
-            v-model="formData.timeTo"
+            v-model:time="formData.timeTo"
             label="To"
-            ampm
+            ampm="24"
             :invalid="timeToInvalid"
             :invalidText="timeToInvalidText"
           />
@@ -59,29 +63,38 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, watch, computed} from 'vue';
 
 const props = defineProps({
   isOpen: {
     type: Boolean,
     required: true
   },
-  roomId: {
-    type: Number,
-    required: true
+  booking: {
+    type: Object,
+    required: false
   }
 });
 
 const emit = defineEmits(['close', 'create']);
-
 const formData = ref({
-  subject: '',
-  date: new Date().toISOString().split('T')[0],
-  timeFrom: '',
-  timeTo: '',
-  user: 'EIT Digital Master Students',
-  repeat: 'Doesn\'t repeat'
+    subject: props.booking?.subject || '',
+    date: props.booking?.date ||  new Date(),
+    timeFrom: props.booking?.timeFrom || '',
+    timeTo:  props.booking?.timeTo || '',
 });
+
+
+watch(() =>  props.booking, (newValue) => {
+  if (newValue) {
+    formData.value = {
+      subject: newValue.subject || '',
+      date: newValue.date || new Date(),
+      timeFrom: newValue.timeFrom || '',
+      timeTo: newValue.timeTo || '',
+    };
+  }
+}, { deep: true });
 
 // Notification states
 const showSuccessNotification = ref(false);
@@ -150,25 +163,25 @@ const handleCreate = async () => {
 };
 
 // Booking handlers
-const handleBookingCreate = async (bookingData) => {
-  try {
-    // Simulate API call
-    await createBooking(bookingData);
+// const handleBookingCreate = async (bookingData) => {
+//   try {
+//     // Simulate API call
+//     await createBooking(bookingData);
     
-    // Show success notification
-    notificationTitle.value = 'Booking Confirmed';
-    notificationMessage.value = `Room ${props.roomId} booked for ${bookingData.date} from ${bookingData.timeFrom} to ${bookingData.timeTo}`;
-    showSuccessNotification.value = true;
+//     // Show success notification
+//     notificationTitle.value = 'Booking Confirmed';
+//     notificationMessage.value = `Room ${props.roomId} booked for ${bookingData.date} from ${bookingData.timeFrom} to ${bookingData.timeTo}`;
+//     showSuccessNotification.value = true;
     
-    // Update bookings list
-    await fetchBookings();
+//     // Update bookings list
+//     await fetchBookings();
     
-  } catch (error) {
-    // Show error notification
-    errorMessage.value = error.message || 'An error occurred while creating the booking';
-    showErrorNotification.value = true;
-  }
-};
+//   } catch (error) {
+//     // Show error notification
+//     errorMessage.value = error.message || 'An error occurred while creating the booking';
+//     showErrorNotification.value = true;
+//   }
+// };
 
 // Notification handlers
 const hideSuccessNotification = () => {
