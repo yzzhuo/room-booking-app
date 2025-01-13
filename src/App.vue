@@ -24,7 +24,7 @@
         <UserAvatar32 />
       </cv-header-global-action>
     </template>
-    <template v-slot:right-panels>
+    <!-- <template v-slot:right-panels>
       <cv-header-panel  id="user-panel">
         <cv-side-nav-items>
           <cv-side-nav-link href="javascript:void(0)">
@@ -33,7 +33,7 @@
           </cv-side-nav-link>
         </cv-side-nav-items>
       </cv-header-panel>
-    </template>
+    </template> -->
   </cv-header>
   <main class="mt-16 ml-12">
     <RouterView />
