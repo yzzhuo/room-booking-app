@@ -21,7 +21,7 @@
 
     <!-- Available Rooms -->
     <section>
-      <h2 class="text-xl font-semibold mb-4">Frenquent Booking Room</h2>
+      <h2 class="text-xl font-semibold mb-4">Your Most Booked Rooms</h2>
       <div class="border-2 border-gray-200 rounded p-0">
         <!-- Room Grid -->
         <div class="grid grid-cols-3 gap-4">
@@ -29,7 +29,6 @@
             v-for="room in rooms" 
             :key="room.id"
             :room="room"
-            @book="bookRoom"
           />
         </div>
       </div>
@@ -59,8 +58,6 @@ const transformBooking = (booking) => {
   };
 };
 
-const router = useRouter();
-
 const upcomingBookings = ref(bookingInfo.bookings
 .filter(booking => booking.status === 'upcoming')
 .map(transformBooking)
@@ -68,10 +65,6 @@ const upcomingBookings = ref(bookingInfo.bookings
 
 const rooms = ref(roomInfo.rooms.filter(room => roomInfo.favourite_rooms.includes(room.id)));
 
-const bookRoom = (roomId) => {
-  // TODO: Implement room booking
-  router.push('/room');
-};
 </script>
 
 <style scoped>

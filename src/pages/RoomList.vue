@@ -25,9 +25,8 @@
             </div>
 
             <cv-select
-                @change="onChange"
                 label="Capacity"
-                light="true"
+                :light="true"
                 id="capacity" 
                 v-model="selectedCapacity"
                 class="mb-2"
@@ -36,9 +35,8 @@
                 <cv-select-option v-for="capacity in capacities" :key="capacity" :value="capacity">{{ capacity }}</cv-select-option>
             </cv-select>
             <cv-select
-                @change="onChange"
                 label="Floor"
-                light="true"
+                :light="true"
                 id="floor" 
                 v-model="selectedFloor"
             >

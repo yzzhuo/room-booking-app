@@ -31,12 +31,12 @@
 
           <div>
             <h3 class="font-semibold mb-3">Details</h3>
-            <cv-accordion @change="onChange" :align="align" :size="size">
+            <cv-accordion>
               <cv-accordion-item title="Booking Details">
                 <template v-slot:title>Booking Instructions</template>
                 <template v-slot:content>
                   <ul class="text-sm text-gray-600 space-y-2">
-                    <li>You can make bookings 3 months in advance.</li>
+                    <li>You can make bookings 2 weeks in advance.</li>
                     <li>The duration of the booking should be between 30 minutes - 3 hours.</li>
                     <li>You can have up to one booking at a time.</li>
                   </ul>
@@ -56,7 +56,6 @@
                     <cv-list-item>Users are responsible for leaving the room in the same condition as they found it. Any damage or excessive cleaning required will result in additional charges.</cv-list-item>
                     <cv-list-item>Users must comply with all on-site policies and instructions provided by staff.</cv-list-item>
                   </cv-list>
-                  <p class="text-sm text-gray-600">The room is to be used solely for professional purposes, including meetings and video conferencing.</p>
                 </template>
               </cv-accordion-item>
             </cv-accordion>
@@ -77,7 +76,7 @@
         <div class="flex justify-between items-center mb-6">
           <h3 class="text-xl font-semibold">Bookings</h3>
           <div class="flex gap-4">
-            <cv-date-picker kind="single" v-model="selectedDate" :cal-options="calOptions" @dateChange="onDateChange">
+            <cv-date-picker kind="single" v-model="selectedDate" :cal-options="calOptions">
             </cv-date-picker>
             <cv-button class="self-end" @click="openBookingModal" aria-label="Booking button" default="Book" size="field">Book</cv-button>
           </div>
@@ -92,8 +91,8 @@
               <cv-data-table-heading id="sb-standard" heading="Reserver" />
             </template>
             <template #data>
-              <cv-data-table-row v-for="row in bookings" :id="row.id" :key="row.time" :value="row.name">
-                <cv-data-table-cell>{{row.time}}</cv-data-table-cell>
+              <cv-data-table-row v-for="row in bookings" :id="`${row.id}`" :key="row.time" :value="row.name">
+                <cv-data-table-cell>{{`${row.timeFrom} to ${row.timeTo}`}} </cv-data-table-cell>
                 <cv-data-table-cell>
                   <div>
                     <div class="font-semibold">{{row.subject}}</div>
@@ -114,23 +113,25 @@
         date: selectedDate
       }"
       @close="closeBookingModal"
-      @create="handleBookingCreate"
+      @save="handleBookingCreate"
     />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import GroupIcon32 from '@carbon/icons-vue/es/group/32';
 import roomInfo from '../data/room-info.json';
 import { CvDataTable } from '@carbon/vue';
 import BookingModal from '../components/BookingModal.vue';
+import userInfo from '../data/user-info.json';
+import { useNotificationStore } from '../stores/notificationStore';
 
+const notificationStore = useNotificationStore();
 const route = useRoute();
 const room = ref(null);
 const isBookingModalOpen = ref(false);
-
 const bookings = ref([]);
 
 const now = new Date();
@@ -139,18 +140,25 @@ nextWeek.setDate(now.getDate() + 14);
 const calOptions = ref({
   minDate: now,
   maxDate: nextWeek,
-  dateFormat: 'm/d/Y'
+  dateFormat: 'Y-m-d'
 })
+
+const getRandomBookings = () => {
+  const randomIndex = Math.floor(Math.random() * roomInfo.default_room_bookings.length);
+  return roomInfo.default_room_bookings[randomIndex];
+}
 
 onMounted(() => {
   const roomId = parseInt(route.params.id);
   room.value = roomInfo.rooms.find(r => `${r.id}` == `${roomId}`)
-  bookings.value = room.value.bookings;
-  console.log('bookings:', bookings.value);
+  bookings.value = getRandomBookings();
 });
 
 const selectedDate = ref(now);
 
+watch(selectedDate, () => {
+  bookings.value = getRandomBookings();
+});
 const openBookingModal = () => {
   isBookingModalOpen.value = true;
 };
@@ -159,13 +167,14 @@ const closeBookingModal = () => {
   isBookingModalOpen.value = false;
 };
 
-const editBooking = (booking) => {
-  // Implement edit logic
-  console.log('Editing booking:', booking);
+const handleBookingCreate = (booking) => {
+  // Add the new booking to the list
+  bookings.value.push({
+    ...booking,
+    attendees: userInfo.currentUser.name
+  });
+  notificationStore.addNotification('Booking created successfully', 'success');
+  closeBookingModal();
 };
 
-const deleteBooking = (booking) => {
-  // Implement delete logic
-  console.log('Deleting booking:', booking);
-};
 </script>

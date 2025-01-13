@@ -19,7 +19,7 @@
               <template #data>
                 <cv-data-table-row
                   v-for="booking in upcomingBookings"
-                  :id="booking.id"
+                  :id="`${booking.id}`" 
                   :key="booking.id"
                 >
                   <cv-data-table-cell>
@@ -75,7 +75,7 @@
               <template #data>
                 <cv-data-table-row
                   v-for="booking in pastBookings"
-                  :id="booking.id"
+                  :id="`${booking.id}`" 
                   :key="booking.id"
                 >
                   <cv-data-table-cell>
@@ -114,7 +114,7 @@
               <template #data>
                 <cv-data-table-row
                   v-for="booking in cancelledBookings"
-                  :id="booking.id"
+                  :id="`${booking.id}`"
                   :key="booking.id"
                 >
                   <cv-data-table-cell>
@@ -128,7 +128,7 @@
                   <cv-data-table-cell>
                     <div>
                       <div class="font-semibold">{{ booking.room }}</div>
-                      <div class="text-gray-600">{{ booking.date }}</div>
+                      <div class="text-gray-600">{{ formatDate(booking.date) }}</div>
                     </div>
                   </cv-data-table-cell>
                   <cv-data-table-cell>{{ booking.subject }}</cv-data-table-cell>
@@ -148,6 +148,7 @@
       @save="saveBooking"
     />
     <CancelBookingModal
+      v-if="isCancelModalOpen"
       :is-open="isCancelModalOpen"
       :booking="selectedBooking"
       @close="closeCancelModal"
@@ -162,14 +163,21 @@ import { ref, computed } from 'vue';
 import { CvDataTable } from '@carbon/vue';
 import BookingModal from '../components/BookingModal.vue';
 import CancelBookingModal from '../components/CancelBookingModal.vue';
-import bookingData from '../data/booking-info.json';
+import bookingDataRaw from '../data/booking-info.json';
 import roomData from '../data/room-info.json';
+import dayjs from 'dayjs';
+import { useNotificationStore } from '../stores/notificationStore';
+const notificationStore = useNotificationStore();
 
+const bookingData = ref(bookingDataRaw);
 const selectedTab = ref('tab-upcoming');
 const isEditModalOpen = ref(false);
 const selectedBooking = ref(null);
 const isCancelModalOpen = ref(false);
 
+const formatDate = (dateString) => {
+  return dayjs(dateString).format('YYYY-MM-DD');
+};
 
 // Transform bookings data to match the component's expected format
 const transformBooking = (booking) => {
@@ -185,19 +193,19 @@ const transformBooking = (booking) => {
 };
 // Filter bookings by status
 const upcomingBookings = computed(() => 
-  bookingData.bookings
+  bookingData.value.bookings
     .filter(booking => booking.status === 'upcoming')
     .map(transformBooking)
 );
 
 const pastBookings = computed(() => 
-  bookingData.bookings
+  bookingData.value.bookings
     .filter(booking => booking.status === 'past')
     .map(transformBooking)
 );
 
 const cancelledBookings = computed(() => 
-  bookingData.bookings
+  bookingData.value.bookings
     .filter(booking => booking.status === 'cancelled')
     .map(transformBooking)
 );
@@ -214,10 +222,17 @@ const closeEditModal = () => {
 };
 
 const saveBooking = (updatedBooking) => {
-  const index = upcomingBookings.value.findIndex((b) => b.id === updatedBooking.id);
-  if (index !== -1) {
-    upcomingBookings.value[index] = updatedBooking;
+  // Find and update the booking in the source data
+  const bookingIndex = bookingData.value.bookings.findIndex((b) => b.id === updatedBooking.id);
+  if (bookingIndex !== -1) {
+    // Update the source data instead of the computed property
+    bookingData.value.bookings[bookingIndex] = {
+      ...bookingData.value.bookings[bookingIndex],
+      ...updatedBooking,
+      date: formatDate(updatedBooking.date),
+    };
   }
+  notificationStore.addNotification('Booking updated successfully', 'success');
   closeEditModal();
 };
 
@@ -233,9 +248,10 @@ const closeCancelModal = () => {
 
 const handleBookingCancel = async (booking) => {
   try {
-    // Handle the booking cancellation
-    console.log('Booking cancelled:', booking);
-    // Refresh booking list or update UI as needed
+    // remove the booking from the source data
+    bookingData.value.bookings = bookingData.value.bookings.filter(b => b.id !== booking.id);
+    notificationStore.addNotification('Booking cancelled successfully', 'success');
+    closeCancelModal();
   } catch (error) {
     console.error('Error:', error);
   }

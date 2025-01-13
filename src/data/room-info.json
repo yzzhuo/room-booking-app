@@ -15,37 +15,7 @@
         "Projector",
         "Video Conferencing"
       ],
-      "imageUrl": "/conference-room-1.jpg",
-      "bookings": [
-        {
-          "id": 1,
-          "room": "279",
-          "time": "13:00 to 16:00",
-          "subject": "Meeting",
-          "attendees": "EIT Digital Master Students"
-        },
-        {
-          "id": 2,
-          "room": "275",
-          "time": "14:00 to 17:00",
-          "subject": "Meeting",
-          "attendees": "EIT Digital Master Students"
-        },
-        {
-          "id": 3,
-          "room": "215",
-          "time": "16:00 to 16:30",
-          "subject": "Meeting",
-          "attendees": "Roberto Lumbreras"
-        },
-        {
-          "id": 5,
-          "room": "215",
-          "time": "16:30 to 17:30",
-          "subject": "[Entrevista] Adrián Bellver",
-          "attendees": "Andrea Iannetta"
-        }
-      ]
+      "imageUrl": "/conference-room-1.jpg"
     },
     {
       "id": 2,
@@ -55,37 +25,7 @@
       "amenities": [
         "Whiteboard"
       ],
-      "imageUrl": "/conference-room-2.jpg",
-      "bookings": [
-        {
-          "id": 1,
-          "room": "279",
-          "time": "13:00 to 16:00",
-          "subject": "Meeting",
-          "attendees": "EIT Digital Master Students"
-        },
-        {
-          "id": 2,
-          "room": "275",
-          "time": "14:00 to 17:00",
-          "subject": "Meeting",
-          "attendees": "EIT Digital Master Students"
-        },
-        {
-          "id": 3,
-          "room": "215",
-          "time": "16:00 to 16:30",
-          "subject": "Meeting",
-          "attendees": "Roberto Lumbreras"
-        },
-        {
-          "id": 5,
-          "room": "215",
-          "time": "16:30 to 17:30",
-          "subject": "[Entrevista] Adrián Bellver",
-          "attendees": "Andrea Iannetta"
-        }
-      ]
+      "imageUrl": "/conference-room-2.jpg"
     },
     {
       "id": 3,
@@ -95,37 +35,7 @@
       "amenities": [
         "Projector"
       ],
-      "imageUrl": "/conference-room-3.jpg",
-      "bookings": [
-        {
-          "id": 1,
-          "room": "279",
-          "time": "13:00 to 16:00",
-          "subject": "Meeting",
-          "attendees": "EIT Digital Master Students"
-        },
-        {
-          "id": 2,
-          "room": "275",
-          "time": "14:00 to 17:00",
-          "subject": "Meeting",
-          "attendees": "EIT Digital Master Students"
-        },
-        {
-          "id": 3,
-          "room": "215",
-          "time": "16:00 to 16:30",
-          "subject": "Meeting",
-          "attendees": "Roberto Lumbreras"
-        },
-        {
-          "id": 5,
-          "room": "215",
-          "time": "16:30 to 17:30",
-          "subject": "[Entrevista] Adrián Bellver",
-          "attendees": "Andrea Iannetta"
-        }
-      ]
+      "imageUrl": "/conference-room-3.jpg"
     },
     {
       "id": 4,
@@ -137,37 +47,7 @@
         "Projector",
         "Screen"
       ],
-      "imageUrl": "/traning-room-1.jpg",
-      "bookings": [
-        {
-          "id": 1,
-          "room": "279",
-          "time": "13:00 to 16:00",
-          "subject": "Meeting",
-          "attendees": "EIT Digital Master Students"
-        },
-        {
-          "id": 2,
-          "room": "275",
-          "time": "14:00 to 17:00",
-          "subject": "Meeting",
-          "attendees": "EIT Digital Master Students"
-        },
-        {
-          "id": 3,
-          "room": "215",
-          "time": "16:00 to 16:30",
-          "subject": "Meeting",
-          "attendees": "Roberto Lumbreras"
-        },
-        {
-          "id": 5,
-          "room": "215",
-          "time": "16:30 to 17:30",
-          "subject": "[Entrevista] Adrián Bellver",
-          "attendees": "Andrea Iannetta"
-        }
-      ]
+      "imageUrl": "/traning-room-1.jpg"
     },
     {
       "id": 5,
@@ -178,37 +58,7 @@
         "Whiteboard",
         "Video Conferencing"
       ],
-      "imageUrl": "/meeting-room-1.jpg",
-      "bookings": [
-        {
-          "id": 1,
-          "room": "279",
-          "time": "13:00 to 16:00",
-          "subject": "Meeting",
-          "attendees": "EIT Digital Master Students"
-        },
-        {
-          "id": 2,
-          "room": "275",
-          "time": "14:00 to 17:00",
-          "subject": "Meeting",
-          "attendees": "EIT Digital Master Students"
-        },
-        {
-          "id": 3,
-          "room": "215",
-          "time": "16:00 to 16:30",
-          "subject": "Meeting",
-          "attendees": "Roberto Lumbreras"
-        },
-        {
-          "id": 5,
-          "room": "215",
-          "time": "16:30 to 17:30",
-          "subject": "[Entrevista] Adrián Bellver",
-          "attendees": "Andrea Iannetta"
-        }
-      ]
+      "imageUrl": "/meeting-room-1.jpg"
     },
     {
       "id": 6,
@@ -218,37 +68,7 @@
       "amenities": [
         "Whiteboard"
       ],
-      "imageUrl": "/meeting-room-2.jpg",
-      "bookings": [
-        {
-          "id": 1,
-          "room": "279",
-          "time": "13:00 to 16:00",
-          "subject": "Meeting",
-          "attendees": "EIT Digital Master Students"
-        },
-        {
-          "id": 2,
-          "room": "275",
-          "time": "14:00 to 17:00",
-          "subject": "Meeting",
-          "attendees": "EIT Digital Master Students"
-        },
-        {
-          "id": 3,
-          "room": "215",
-          "time": "16:00 to 16:30",
-          "subject": "Meeting",
-          "attendees": "Roberto Lumbreras"
-        },
-        {
-          "id": 5,
-          "room": "215",
-          "time": "16:30 to 17:30",
-          "subject": "[Entrevista] Adrián Bellver",
-          "attendees": "Andrea Iannetta"
-        }
-      ]
+      "imageUrl": "/meeting-room-2.jpg"
     },
     {
       "id": 7,
@@ -261,37 +81,7 @@
         "Video Conferencing",
         "Screen"
       ],
-      "imageUrl": "/boardroom-1.jpg",
-      "bookings": [
-        {
-          "id": 1,
-          "room": "279",
-          "time": "13:00 to 16:00",
-          "subject": "Meeting",
-          "attendees": "EIT Digital Master Students"
-        },
-        {
-          "id": 2,
-          "room": "275",
-          "time": "14:00 to 17:00",
-          "subject": "Meeting",
-          "attendees": "EIT Digital Master Students"
-        },
-        {
-          "id": 3,
-          "room": "215",
-          "time": "16:00 to 16:30",
-          "subject": "Meeting",
-          "attendees": "Roberto Lumbreras"
-        },
-        {
-          "id": 5,
-          "room": "215",
-          "time": "16:30 to 17:30",
-          "subject": "[Entrevista] Adrián Bellver",
-          "attendees": "Andrea Iannetta"
-        }
-      ]
+      "imageUrl": "/boardroom-1.jpg"
     },
     {
       "id": 8,
@@ -302,37 +92,7 @@
         "Video Conferencing",
         "Screen"
       ],
-      "imageUrl": "/call-room-1.jpg",
-      "bookings": [
-        {
-          "id": 1,
-          "room": "279",
-          "time": "13:00 to 16:00",
-          "subject": "Meeting",
-          "attendees": "EIT Digital Master Students"
-        },
-        {
-          "id": 2,
-          "room": "275",
-          "time": "14:00 to 17:00",
-          "subject": "Meeting",
-          "attendees": "EIT Digital Master Students"
-        },
-        {
-          "id": 3,
-          "room": "215",
-          "time": "16:00 to 16:30",
-          "subject": "Meeting",
-          "attendees": "Roberto Lumbreras"
-        },
-        {
-          "id": 5,
-          "room": "215",
-          "time": "16:30 to 17:30",
-          "subject": "[Entrevista] Adrián Bellver",
-          "attendees": "Andrea Iannetta"
-        }
-      ]
+      "imageUrl": "/call-room-1.jpg"
     },
     {
       "id": 9,
@@ -343,37 +103,85 @@
         "Video Conferencing",
         "Screen"
       ],
-      "imageUrl": "/call-room-2.jpg",
-      "bookings": [
-        {
-          "id": 1,
-          "room": "279",
-          "time": "13:00 to 16:00",
-          "subject": "Meeting",
-          "attendees": "EIT Digital Master Students"
-        },
-        {
-          "id": 2,
-          "room": "275",
-          "time": "14:00 to 17:00",
-          "subject": "Meeting",
-          "attendees": "EIT Digital Master Students"
-        },
-        {
-          "id": 3,
-          "room": "215",
-          "time": "16:00 to 16:30",
-          "subject": "Meeting",
-          "attendees": "Roberto Lumbreras"
-        },
-        {
-          "id": 5,
-          "room": "215",
-          "time": "16:30 to 17:30",
-          "subject": "[Entrevista] Adrián Bellver",
-          "attendees": "Andrea Iannetta"
-        }
-      ]
+      "imageUrl": "/call-room-2.jpg"
     }
+  ],
+  "default_room_bookings": [
+    [
+      {
+        "id": 1,
+        "timeFrom": "13:00",
+        "timeTo": "14:00",
+        "subject": "Team Meeting",
+        "attendees": "EIT Digital Master Students"
+      },
+      {
+        "id": 2,
+        "timeFrom": "14:00",
+        "timeTo": "17:00",
+        "subject": "Meeting",
+        "attendees": "EIT Digital Master Students"
+      },
+      {
+        "id": 3,
+        "timeFrom": "17:30",
+        "timeTo": "18:30",
+        "subject": "Meeting",
+        "attendees": "Roberto Lumbreras"
+      }
+    ],
+    [
+      {
+        "id": 5,
+        "timeFrom": "16:30",
+        "timeTo": "17:30",
+        "subject": "[Entrevista] Adrián Bellver",
+        "attendees": "Andrea Iannetta"
+      },
+      {
+        "id": 6,
+        "timeFrom": "17:30",
+        "timeTo": "18:30",
+        "subject": "Team Meeting",
+        "attendees": "Cockayme"
+      }
+    ],
+    [
+      {
+        "id": 7,
+        "subject": "Team Meeting",
+        "attendees": "Wrightim",
+        "timeFrom": "9:00",
+        "timeTo": "12:00"
+      },
+      {
+        "id": 8,
+        "timeFrom": "15:00",
+        "timeTo": "16:00",
+        "subject": "Interview Meeting",
+        "attendees": "Lafford"
+      },
+      {
+        "id": 9,
+        "timeFrom": "16:00",
+        "timeTo": "17:00",
+        "subject": "Product Design Meeting",
+        "attendees": "Tim"
+      },
+      {
+        "id": 10,
+        "timeFrom": "17:00",
+        "timeTo": "18:00",
+        "subject": "Meeting",
+        "attendees": "Jack"
+      },
+      {
+        "id": 11,
+        "timeFrom": "18:00",
+        "timeTo": "19:00",
+        "subject": "Team Meeting",
+        "attendees": "Jennifer"
+      }
+    ]
   ]
 }

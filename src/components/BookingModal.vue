@@ -23,37 +23,40 @@
         </cv-form-item>
 
         <!-- Date -->
-        <cv-date-picker
-          v-model="formData.date"
-          label="Date"
-          kind="single"
-          :dateFormat="dateFormat"
-        />
+        <cv-form-item>
+          <cv-date-picker
+            v-model="formData.date"
+            label="Date"
+            kind="single"
+            :calOptions="{
+              dateFormat: 'Y-m-d',
+            }"
+          />
+        </cv-form-item>
 
         <!-- Time Range -->
         <div class="grid grid-cols-2 gap-4">
-          <cv-time-picker
-            v-model:time="formData.timeFrom"
-            label="From"
-            ampm="24"
-            :invalid="timeFromInvalid"
-            :invalidText="timeFromInvalidText"
-          />
-          
-          <cv-time-picker
-            v-model:time="formData.timeTo"
-            label="To"
-            ampm="24"
-            :invalid="timeToInvalid"
-            :invalidText="timeToInvalidText"
-          />
+          <cv-form-item>
+            <cv-time-picker
+              v-model:time="formData.timeFrom"
+              label="From"
+              ampm="24"
+            />
+          </cv-form-item>
+          <cv-form-item>
+            <cv-time-picker
+              v-model:time="formData.timeTo"
+              label="To"
+              ampm="24"
+            />
+          </cv-form-item>
         </div>
-        <cv-inline-notification v-if="showErrorNotification" kind="error" @action="onAction" @close="onClose" :subTitle="errorMessage" />
+        <cv-inline-notification v-if="showErrorNotification" kind="error"  @close="onCloseError" :subTitle="errorMessage" />
       </cv-form>
     </template>
 
     <template #primary-button>
-      Create
+      Save
     </template>
 
     <template #secondary-button>
@@ -63,7 +66,8 @@
 </template>
 
 <script setup>
-import { ref, watch, computed} from 'vue';
+import { ref, watch } from 'vue';
+import dayjs from 'dayjs';
 
 const props = defineProps({
   isOpen: {
@@ -76,14 +80,13 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['close', 'create']);
+const emit = defineEmits(['close', 'save']);
 const formData = ref({
     subject: props.booking?.subject || '',
     date: props.booking?.date ||  new Date(),
     timeFrom: props.booking?.timeFrom || '',
     timeTo:  props.booking?.timeTo || '',
 });
-
 
 watch(() =>  props.booking, (newValue) => {
   if (newValue) {
@@ -97,123 +100,59 @@ watch(() =>  props.booking, (newValue) => {
 }, { deep: true });
 
 // Notification states
-const showSuccessNotification = ref(false);
 const showErrorNotification = ref(false);
-const notificationTitle = ref('');
-const notificationMessage = ref('');
 const errorMessage = ref('');
 
-
-const dateFormat = (date) => {
-  return new Date(date).toISOString().split('T')[0];
+const validateTimeFormat = (time) => {
+  return time.match(/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/);
+};
+const validateTime = () => {
+  // time should be pattern like HH:mm and should not be empty
+  if (!formData.value.timeFrom || !formData.value.timeTo
+    || !validateTimeFormat(formData.value.timeFrom) || !validateTimeFormat(formData.value.timeTo)
+  ) return 'Please enter a valid time';
+  
+  const timeFrom = dayjs(`${formData.value.date} ${formData.value.timeFrom}`, 'YYYY-MM-DD HH:mm');
+  const timeTo = dayjs(`${formData.value.date} ${formData.value.timeTo}`, 'YYYY-MM-DD HH:mm');
+  // timeTo should not be earlier than timeFrom using dayjs
+  if (!timeTo.isAfter(timeFrom)) {
+    return 'End time cannot be earlier than start time';
+  }
+  
+  return '';
 };
 
-// Validation
-const timeFromInvalid = computed(() => {
-  if (!formData.value.timeFrom) return false;
-  // Add your time validation logic here
-  return false;
-});
-
-const timeToInvalid = computed(() => {
-  if (!formData.value.timeTo) return false;
-  if (!formData.value.timeFrom) return false;
-  // Add your time range validation logic here
-  return false;
-});
-
-const timeFromInvalidText = computed(() => {
-  if (timeFromInvalid.value) return 'Please enter a valid time';
+const validateSubject = () => {
+  if (!formData.value.subject) return 'Please enter a subject';
   return '';
-});
+};
 
-const timeToInvalidText = computed(() => {
-  if (timeToInvalid.value) return 'End time must be after start time';
+const valudateDate = () => {
+  if (!formData.value.date) return 'Please enter a date';
   return '';
-});
+}
 
-const isFormValid = computed(() => {
-  return (
-    formData.value.subject &&
-    formData.value.date &&
-    formData.value.timeFrom &&
-    formData.value.timeTo &&
-    !timeFromInvalid.value &&
-    !timeToInvalid.value
-  );
-});
+const validateForm =() => {
+  // validate form item and return the error message
+  return validateSubject() || valudateDate() ||  validateTime()
+};
 
 const handleCreate = async () => {
-  try {
-    // Simulate API call
-    // await createBooking(bookingData);
-    
-    // Show success notification
-    notificationTitle.value = 'Booking Confirmed';
-    notificationMessage.value = `Room ${props.roomId} booked for ${formData.value.date} from ${formData.value.timeFrom} to ${formData.value.timeTo}`;
-    showSuccessNotification.value = true;
-    // Update bookings list
-    // await fetchBookings();
-    closeModal();
-  } catch (error) {
-    // Show error notification
-    errorMessage.value = error.message || 'An error occurred while creating the booking';
+  // validate form
+  const error = validateForm();
+  if (error) {
+    errorMessage.value = error;
     showErrorNotification.value = true;
+    return;
   }
+  emit('save', formData.value);
+
 };
 
-// Booking handlers
-// const handleBookingCreate = async (bookingData) => {
-//   try {
-//     // Simulate API call
-//     await createBooking(bookingData);
-    
-//     // Show success notification
-//     notificationTitle.value = 'Booking Confirmed';
-//     notificationMessage.value = `Room ${props.roomId} booked for ${bookingData.date} from ${bookingData.timeFrom} to ${bookingData.timeTo}`;
-//     showSuccessNotification.value = true;
-    
-//     // Update bookings list
-//     await fetchBookings();
-    
-//   } catch (error) {
-//     // Show error notification
-//     errorMessage.value = error.message || 'An error occurred while creating the booking';
-//     showErrorNotification.value = true;
-//   }
-// };
-
-// Notification handlers
-const hideSuccessNotification = () => {
-  showSuccessNotification.value = false;
-};
-
-const hideErrorNotification = () => {
+const onCloseError = () => {
   showErrorNotification.value = false;
 };
 
-// Mock API functions
-const createBooking = async (bookingData) => {
-  // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  
-  // Simulate success/failure
-  if (Math.random() > 0.1) { // 90% success rate
-    return {
-      success: true,
-      data: {
-        id: Date.now(),
-        ...bookingData
-      }
-    };
-  } else {
-    throw new Error('Unable to create booking. Please try again.');
-  }
-};
-
-const fetchBookings = async () => {
-  // Implementation for refreshing bookings list
-};
 
 const closeModal = () => {
   emit('close');
@@ -226,19 +165,11 @@ const closeModal = () => {
     user: 'EIT Digital Master Students',
     repeat: 'Doesn\'t repeat'
   };
+  errorMessage.value = '';
+  showErrorNotification.value = false;
 };
 </script>
 
 <style scoped>
-:deep(.bx--modal-container) {
-  max-width: 480px;
-}
 
-:deep(.bx--modal-content) {
-  margin-bottom: 1rem;
-}
-
-:deep(.bx--dropdown__wrapper) {
-  width: 100%;
-}
 </style>

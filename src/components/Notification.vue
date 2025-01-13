@@ -1,29 +1,31 @@
 <template>
-  <cv-toast-notification kind="success" title="success" subTitle="subtitle" caption="more information" @close="onClose" >
-    <template v-if="args.titleSlot" #title>
-      <strong style="color: orange; font-size: 1.25rem;">Custom</strong> <span style="color: yellow;">title</span>
-    </template>
-
-    <template v-if="args.subtitleSlot" #subtitle>
-      Some <strong style="color: orange; font-size: 1.25rem;">custom</strong> <span style="color: yellow;">subtitle</span>
-    </template>
-
-    <template v-if="args.captionSlot" #caption>
-      Some <span style="color: green;">custom</span> <strong style="color: orange; font-size: 0.75rem;">caption</strong>
-    </template>
-
-    <template v-if="args.defaultSlot">
-      Default slot content.
-    </template>
-  </cv-toast-notification>
+  <div class="notification-container">
+    <cv-toast-notification
+      v-if="notification.message"
+      :kind="notification.type"
+      :title="notification.message"
+      @close="removeNotification"
+    />
+  </div>
 </template>
 
-<script>
-export default {
+<script setup>
+import { useNotificationStore } from '../stores/notificationStore';
+import { computed } from 'vue';
 
-}
+const notificationStore = useNotificationStore();
+const notification = computed(() => notificationStore.notification);
+
+const removeNotification = () => {
+  notificationStore.removeNotification();
+};
 </script>
 
-<style>
-
+<style scoped>
+.notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
 </style>

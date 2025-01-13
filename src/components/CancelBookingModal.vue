@@ -34,23 +34,11 @@ const props = defineProps({
 
 const emit = defineEmits(['close', 'confirm']);
 
-const isLoading = ref(false);
-
 const handleClose = () => {
   emit('close');
 };
 
 const handleConfirm = async () => {
-  try {
-    isLoading.value = true;
-    // Here you would typically make an API call to cancel the booking
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulated API delay
-    emit('confirm', props.booking);
-  } catch (error) {
-    console.error('Error canceling booking:', error);
-  } finally {
-    isLoading.value = false;
-    handleClose();
-  }
+  emit('confirm', props.booking);
 };
 </script>

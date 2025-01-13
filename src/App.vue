@@ -16,7 +16,6 @@
     <template v-slot:header-global>
       <cv-header-global-action
         aria-label="User avatar"
-        @click="actionUserAvatar"
         aria-controls="user-panel"
         :label="`${currentUser.name}`"
         tipPosition="bottom"
@@ -26,7 +25,7 @@
       </cv-header-global-action>
     </template>
     <template v-slot:right-panels>
-      <cv-header-panel  id="user-panel" @panel-resize="onPanelResize">
+      <cv-header-panel  id="user-panel">
         <cv-side-nav-items>
           <cv-side-nav-link href="javascript:void(0)">
             <template v-slot:nav-icon><Logout16/></template>
@@ -38,6 +37,7 @@
   </cv-header>
   <main class="mt-16 ml-12">
     <RouterView />
+    <Notification />
   </main>
 </template>
 
@@ -46,6 +46,7 @@ import { ref } from 'vue';
 import userInfo from './data/user-info.json';
 import UserAvatar32 from '@carbon/icons-vue/es/user--avatar/32';
 import Logout16 from '@carbon/icons-vue/es/logout/16';
+import Notification from './components/Notification.vue';
 
 const currentUser = ref(userInfo.currentUser);
 
