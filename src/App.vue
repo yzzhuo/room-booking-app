@@ -14,26 +14,29 @@
     </cv-header-nav>
 
     <template v-slot:header-global>
-      <cv-header-global-action
-        aria-label="User avatar"
-        aria-controls="user-panel"
-        :label="`${currentUser.name}`"
-        tipPosition="bottom"
-        tipAlignment="center"
+        <cv-header-global-action
+            aria-label="Help Menu Item"
+            :label="`Need Help?`"
+            tipPosition="bottom"
+            tipAlignment="center"
+            role="button"
+            tabindex="0"
+            @click="navigateToHelpPage"
+          >
+            <!-- Add aria-hidden to decorative icon -->
+            <Help32 aria-hidden="true" />
+          </cv-header-global-action>
+        <cv-header-global-action
+          aria-label="User Information"
+          :label="`${currentUser.name}`"
+          tipPosition="bottom"
+          tipAlignment="center"
+          role="button"
+          tabindex="0"
         >
-        <UserAvatar32 />
-      </cv-header-global-action>
-    </template>
-    <!-- <template v-slot:right-panels>
-      <cv-header-panel  id="user-panel">
-        <cv-side-nav-items>
-          <cv-side-nav-link href="javascript:void(0)">
-            <template v-slot:nav-icon><Logout16/></template>
-              <span  class="text-white">Log out</span>
-          </cv-side-nav-link>
-        </cv-side-nav-items>
-      </cv-header-panel>
-    </template> -->
+          <UserAvatar32 aria-hidden="true" />
+        </cv-header-global-action>
+      </template>
   </cv-header>
   <main class="mt-16 ml-12">
     <RouterView />
@@ -45,10 +48,16 @@
 import { ref } from 'vue';
 import userInfo from './data/user-info.json';
 import UserAvatar32 from '@carbon/icons-vue/es/user--avatar/32';
-import Logout16 from '@carbon/icons-vue/es/logout/16';
+import Help32 from '@carbon/icons-vue/es/help/32';
 import Notification from './components/Notification.vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const currentUser = ref(userInfo.currentUser);
+
+const navigateToHelpPage = () => {
+  router.push('/help')
+};
 
 </script>
 
