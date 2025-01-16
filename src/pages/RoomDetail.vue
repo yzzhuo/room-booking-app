@@ -19,7 +19,9 @@
               <GroupIcon32 class="w-5 h-5 text-gray-600" />
               <span>{{ room.capacity }} persons</span>
             </div>
-            <cv-tag label="Available now" kind="green"/>
+            <div role="list">
+              <cv-tag label="Available now" kind="green"/>
+            </div>
           </div>
 
           <div class="mb-6">
@@ -76,6 +78,7 @@
         <div class="flex justify-between items-center mb-6">
           <h3 class="text-xl font-semibold">Bookings</h3>
           <div class="flex gap-4">
+            <!-- Date Picker Issue: Role="datepicker" is not a valid ARIA role, pattern use 'combo' instead -->
             <cv-date-picker kind="single" v-model="selectedDate" :cal-options="calOptions">
             </cv-date-picker>
             <cv-button class="self-end" @click="openBookingModal" aria-label="Booking button" default="Book" size="field">Book</cv-button>

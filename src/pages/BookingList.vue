@@ -38,19 +38,19 @@
                   </cv-data-table-cell>
                   <cv-data-table-cell>{{ booking.subject }}</cv-data-table-cell>
                   <cv-data-table-cell>
-                    <div class="flex gap-2">
-                      <button
+                    <div class="flex">
+                      <cv-button
                         @click="editBooking(booking)"
-                        class="text-blue-600 hover:underline"
+                        kind="ghost"
                       >
                         Edit
-                      </button>
-                      <button
+                      </cv-button>
+                      <cv-button
+                        kind="danger--ghost"
                         @click="openCancelModal(booking)"
-                        class="text-red-600 hover:underline"
                       >
                         Cancel
-                      </button>
+                      </cv-button>
                     </div>
                   </cv-data-table-cell>
                 </cv-data-table-row>

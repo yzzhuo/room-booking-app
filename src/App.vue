@@ -4,14 +4,26 @@
       <RouterLink to="/">Room Booking System</RouterLink>
     </cv-header-name>
 
-    <cv-header-nav aria-label="Carbon nav">
-      <cv-header-menu-item >
-        <RouterLink to="/rooms">Rooms</RouterLink>
-      </cv-header-menu-item>
-      <cv-header-menu-item >
-        <RouterLink to="/bookings">My Bookings</RouterLink>
-      </cv-header-menu-item>
-    </cv-header-nav>
+    <nav aria-label="Main navigation of Room Booking System" class="text-white">
+      <ul class="flex gap-8" role="menubar" aria-label="Room Booking System">
+        <li role="none" :class="{ 'font-bold underline': isCurrentRoute('/') }">
+          <RouterLink role="menuitem" to="/" 
+            :aria-current="isCurrentRoute('/') ? 'page' : null"
+            >Home</RouterLink>
+        </li>
+        <li role="none" :class="{ 'font-bold underline': isCurrentRoute('/rooms') }">
+          <RouterLink role="menuitem" to="/rooms" 
+            :aria-current="isCurrentRoute('/rooms') ? 'page' : null"
+            >Rooms</RouterLink>
+        </li>
+        <li role="none" :class="{ 'font-bold underline': isCurrentRoute('/bookings') }">
+          <RouterLink role="menuitem" to="/bookings" 
+          :aria-current="isCurrentRoute('/bookings') ? 'page' : null"
+          :class="{ 'font-bold': isCurrentRoute('/bookings') }"
+          >My Bookings</RouterLink>
+        </li>
+      </ul>
+    </nav>
 
     <template v-slot:header-global>
         <cv-header-global-action
@@ -50,15 +62,20 @@ import userInfo from './data/user-info.json';
 import UserAvatar32 from '@carbon/icons-vue/es/user--avatar/32';
 import Help32 from '@carbon/icons-vue/es/help/32';
 import Notification from './components/Notification.vue';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 
 const router = useRouter();
+const route = useRoute();
+
 const currentUser = ref(userInfo.currentUser);
 
 const navigateToHelpPage = () => {
   router.push('/help')
 };
 
+const isCurrentRoute = (path) => {
+  return route.path === path;
+};
 </script>
 
 <style lang="scss">
